@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Environments/ConcreteWalls.tres" type="TileSet" id=1]
+
+[node name="Tiles" type="Node2D"]
+
+[node name="ConcreteWalls" type="TileMap" parent="."]
+tile_set = ExtResource( 1 )
+cell_size = Vector2( 16, 16 )
+format = 1

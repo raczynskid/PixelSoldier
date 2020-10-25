@@ -1,5 +1,11 @@
-[gd_scene format=2]
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://Environments/Tiles.tscn" type="PackedScene" id=1]
 
 [node name="World" type="Node"]
 
 [node name="Level" type="Node" parent="."]
+
+[node name="Tiles" parent="Level" instance=ExtResource( 1 )]
+
+[editable path="Level/Tiles"]
