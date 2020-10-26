@@ -1,11 +1,14 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://Characters/Character.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Spritesheets/Soldat.png" type="Texture" id=2]
+[ext_resource path="res://Characters/Player.gd" type="Script" id=7]
 
-[sub_resource type="Animation" id=8]
+[sub_resource type="AnimationNodeStateMachinePlayback" id=1]
+
+[sub_resource type="Animation" id=2]
 resource_name = "IdleLeft"
-length = 0.1
+length = 0.5
 tracks/0/type = "value"
 tracks/0/path = NodePath("Pivot/Body:frame")
 tracks/0/interp = 1
@@ -19,9 +22,8 @@ tracks/0/keys = {
 "values": [ 34 ]
 }
 
-[sub_resource type="Animation" id=1]
-resource_name = "IdleRight"
-length = 0.1
+[sub_resource type="Animation" id=3]
+length = 0.5
 tracks/0/type = "value"
 tracks/0/path = NodePath("Pivot/Body:frame")
 tracks/0/interp = 1
@@ -35,7 +37,7 @@ tracks/0/keys = {
 "values": [ 6 ]
 }
 
-[sub_resource type="Animation" id=12]
+[sub_resource type="Animation" id=4]
 resource_name = "RollLeft"
 length = 0.3
 tracks/0/type = "value"
@@ -51,8 +53,7 @@ tracks/0/keys = {
 "values": [ 35, 36, 37 ]
 }
 
-[sub_resource type="Animation" id=3]
-resource_name = "RollRight"
+[sub_resource type="Animation" id=5]
 length = 0.3
 tracks/0/type = "value"
 tracks/0/path = NodePath("Pivot/Body:frame")
@@ -67,9 +68,10 @@ tracks/0/keys = {
 "values": [ 7, 8, 9 ]
 }
 
-[sub_resource type="Animation" id=11]
+[sub_resource type="Animation" id=6]
 resource_name = "RunLeft"
-length = 0.2
+length = 0.3
+loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("Pivot/Body:frame")
 tracks/0/interp = 1
@@ -83,9 +85,9 @@ tracks/0/keys = {
 "values": [ 33, 34 ]
 }
 
-[sub_resource type="Animation" id=2]
-resource_name = "RunRight"
-length = 0.2
+[sub_resource type="Animation" id=7]
+length = 0.3
+loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("Pivot/Body:frame")
 tracks/0/interp = 1
@@ -99,9 +101,10 @@ tracks/0/keys = {
 "values": [ 5, 6 ]
 }
 
-[sub_resource type="Animation" id=9]
+[sub_resource type="Animation" id=8]
 resource_name = "ShootLeft"
-length = 0.2
+length = 0.3
+loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("Pivot/Body:frame")
 tracks/0/interp = 1
@@ -115,9 +118,9 @@ tracks/0/keys = {
 "values": [ 31, 32 ]
 }
 
-[sub_resource type="Animation" id=4]
-resource_name = "ShootRight"
-length = 0.2
+[sub_resource type="Animation" id=9]
+length = 0.3
+loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("Pivot/Body:frame")
 tracks/0/interp = 1
@@ -132,8 +135,8 @@ tracks/0/keys = {
 }
 
 [sub_resource type="Animation" id=10]
-resource_name = "ShootUpLeft"
-length = 0.2
+length = 0.3
+loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("Pivot/Body:frame")
 tracks/0/interp = 1
@@ -147,9 +150,9 @@ tracks/0/keys = {
 "values": [ 28, 29 ]
 }
 
-[sub_resource type="Animation" id=5]
-resource_name = "ShootUpRight"
-length = 0.2
+[sub_resource type="Animation" id=11]
+length = 0.3
+loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("Pivot/Body:frame")
 tracks/0/interp = 1
@@ -163,8 +166,7 @@ tracks/0/keys = {
 "values": [ 3, 4 ]
 }
 
-[sub_resource type="Animation" id=13]
-resource_name = "SlideLeft"
+[sub_resource type="Animation" id=12]
 length = 0.3
 tracks/0/type = "value"
 tracks/0/path = NodePath("Pivot/Body:frame")
@@ -179,8 +181,7 @@ tracks/0/keys = {
 "values": [ 38, 39, 40 ]
 }
 
-[sub_resource type="Animation" id=6]
-resource_name = "SlideRight"
+[sub_resource type="Animation" id=13]
 length = 0.3
 tracks/0/type = "value"
 tracks/0/path = NodePath("Pivot/Body:frame")
@@ -196,7 +197,6 @@ tracks/0/keys = {
 }
 
 [sub_resource type="Animation" id=14]
-resource_name = "StabLeft"
 length = 0.6
 tracks/0/type = "value"
 tracks/0/path = NodePath("Pivot/Body:frame")
@@ -211,8 +211,7 @@ tracks/0/keys = {
 "values": [ 41, 42, 43, 44, 45, 46 ]
 }
 
-[sub_resource type="Animation" id=7]
-resource_name = "StabRight"
+[sub_resource type="Animation" id=15]
 length = 0.6
 tracks/0/type = "value"
 tracks/0/path = NodePath("Pivot/Body:frame")
@@ -228,22 +227,30 @@ tracks/0/keys = {
 }
 
 [node name="Player" instance=ExtResource( 1 )]
+script = ExtResource( 7 )
 
-[node name="AnimationPlayer" parent="." index="0"]
-anims/IdleLeft = SubResource( 8 )
-anims/IdleRight = SubResource( 1 )
-anims/RollLeft = SubResource( 12 )
-anims/RollRight = SubResource( 3 )
-anims/RunLeft = SubResource( 11 )
-anims/RunRight = SubResource( 2 )
-anims/ShootLeft = SubResource( 9 )
-anims/ShootRight = SubResource( 4 )
+[node name="AnimationTree" parent="." index="0"]
+parameters/playback = SubResource( 1 )
+parameters/Idle/blend_position = -0.0127971
+parameters/Run/blend_position = 0
+parameters/Shoot/blend_position = Vector2( 0.000624657, 0.00619197 )
+
+[node name="AnimationPlayer" parent="." index="1"]
+playback_process_mode = 0
+anims/IdleLeft = SubResource( 2 )
+anims/IdleRight = SubResource( 3 )
+anims/RollLeft = SubResource( 4 )
+anims/RollRight = SubResource( 5 )
+anims/RunLeft = SubResource( 6 )
+anims/RunRight = SubResource( 7 )
+anims/ShootLeft = SubResource( 8 )
+anims/ShootRight = SubResource( 9 )
 anims/ShootUpLeft = SubResource( 10 )
-anims/ShootUpRight = SubResource( 5 )
-anims/SlideLeft = SubResource( 13 )
-anims/SlideRight = SubResource( 6 )
+anims/ShootUpRight = SubResource( 11 )
+anims/SlideLeft = SubResource( 12 )
+anims/SlideRight = SubResource( 13 )
 anims/StabLeft = SubResource( 14 )
-anims/StabRight = SubResource( 7 )
+anims/StabRight = SubResource( 15 )
 
 [node name="Body" parent="Pivot" index="0"]
 position = Vector2( 0, -6 )
@@ -251,5 +258,5 @@ texture = ExtResource( 2 )
 hframes = 56
 frame = 6
 
-[node name="MovementCollision" parent="." index="3"]
+[node name="MovementCollision" parent="." index="4"]
 position = Vector2( -0.695272, -1.39242 )
