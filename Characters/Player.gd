@@ -11,6 +11,9 @@ var last_vector = Vector2.ZERO
 onready var animationPlayer = get_node("AnimationPlayer")
 onready var animationTree = get_node("AnimationTree")
 onready var animationState = animationTree.get("parameters/playback")
+var air_acceleration = Globals.ACCELERATION / 12
+var jump_cooldown = 20
+var jcooldown = 0
 
 func _ready():
 	animationTree.active = true
@@ -95,8 +98,14 @@ func movement_state(delta, input_vector):
 	animationState.travel('Run')
 
 	# set horizontal velocity based on inputs and globals
-	velocity.x += input_vector.x * Globals.ACCELERATION
-	velocity.x = clamp(velocity.x, -Globals.MAX_SPEED, Globals.MAX_SPEED)
+	if is_on_floor():
+		velocity.x += input_vector.x * Globals.ACCELERATION
+		velocity.x = clamp(velocity.x, -Globals.MAX_SPEED, Globals.MAX_SPEED)
+	else:
+		# use lower acceleration if airborne
+		velocity.x += input_vector.x * air_acceleration
+		velocity.x = clamp(velocity.x, -Globals.MAX_SPEED, Globals.MAX_SPEED)
+
 	return velocity
 
 func gravity_modifiers(delta, velocity):
@@ -109,11 +118,16 @@ func gravity_modifiers(delta, velocity):
 	return velocity
 
 func jump(velocity):
+	if jcooldown > 0:
+		jcooldown -= 1
+		return velocity
+	
 	# apply upwards force if not airborne
-
+	
 	current_state = "jump"
 	if is_on_floor():
 		velocity.y -= Globals.JUMPFORCE
+		jcooldown = jump_cooldown
 	return velocity
 
 func shoot(input_vector):
