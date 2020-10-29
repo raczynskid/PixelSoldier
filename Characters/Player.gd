@@ -7,11 +7,12 @@ var fire = false
 var velocity = Vector2.ZERO
 var input_vector = Vector2.ZERO
 var last_vector = Vector2.ZERO
+var air_acceleration = Globals.ACCELERATION / 12
+var timer = Timer.new()
 
 onready var animationPlayer = get_node("AnimationPlayer")
 onready var animationTree = get_node("AnimationTree")
 onready var animationState = animationTree.get("parameters/playback")
-var air_acceleration = Globals.ACCELERATION / 12
 
 func _ready():
 	animationTree.active = true
@@ -44,7 +45,7 @@ func _physics_process(delta):
 			else:
 				# idle
 				idle_state(last_vector)
-		
+
 		# check for jump input
 		if input_vector.y > 0:
 			velocity = jump(velocity)
@@ -53,7 +54,7 @@ func _physics_process(delta):
 	velocity = move_and_slide(velocity, Globals.UP)
 
 	# debug labels
-	get_node("Label").text = var2str(input_vector)
+	get_node("Label").text = var2str(timer.time_left)
 	get_node("Label2").text = var2str(velocity)
 	get_node("Label3").text = var2str(current_state)
 	
@@ -113,8 +114,20 @@ func jump(velocity):
 	# apply upwards force if not airborne
 	current_state = "jump"
 	if is_on_floor():
-		velocity.y -= Globals.JUMPFORCE
+		if abs(velocity.x) > 20:
+			velocity.y -= clamp(abs(velocity.x) * 5, 100, Globals.JUMPFORCE)
+		else:
+			velocity.y -= Globals.JUMPFORCE
 	return velocity
+
+func roll(velocity):
+	# apply upwards force if not airborne
+	if input_vector != Vector2.ZERO:
+		# use animation tree blendspace to apply direction to shooting animation
+		animationTree.set("parameters/Shoot/blend_position", input_vector)
+		animationState.travel('Shoot')
+	return velocity
+	
 
 func shoot(input_vector):
 	# base shoot state, animation is already initialized from get_movement_inputs()
@@ -130,9 +143,9 @@ func shoot(input_vector):
 	# remove any horizontal speed if remaining
 	if is_on_floor():
 		if velocity.x < 0:
-			velocity.x += Globals.PLAYER_SLIDE_FACTOR / 4
+			velocity.x += Globals.PLAYER_SLIDE_FACTOR / 6
 		if velocity.x > 0:
-			velocity.x -= Globals.PLAYER_SLIDE_FACTOR / 4
+			velocity.x -= Globals.PLAYER_SLIDE_FACTOR / 6
 	return velocity
 
 
