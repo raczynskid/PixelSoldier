@@ -2,7 +2,8 @@ extends KinematicBody2D
 
 var states_stack = []
 var current_state = null
-var fire = false
+var fire : float
+var roll : float
 
 var velocity = Vector2.ZERO
 var input_vector = Vector2.ZERO
@@ -30,6 +31,8 @@ func _physics_process(delta):
 	# prevent movement or idle if in shoot state
 	if current_state == "shoot":
 		velocity = shoot(input_vector)
+	elif current_state == "roll":
+		velocity = roll(velocity)
 	else:
 		if input_vector.x != 0:
 			# horizontal movement
@@ -54,7 +57,7 @@ func _physics_process(delta):
 	velocity = move_and_slide(velocity, Globals.UP)
 
 	# debug labels
-	get_node("Label").text = var2str(timer.time_left)
+	get_node("Label").text = var2str(last_vector)
 	get_node("Label2").text = var2str(velocity)
 	get_node("Label3").text = var2str(current_state)
 	
@@ -70,6 +73,7 @@ func get_movement_inputs():
 func get_action_inputs():
 	# check for keyboard inputs for actions
 	fire = Input.get_action_strength("fire")
+	roll = Input.get_action_strength("ui_down")
 
 	# if input pressed
 	if fire:
@@ -78,6 +82,14 @@ func get_action_inputs():
 			animationTree.set("parameters/Shoot/blend_position", last_vector)
 			animationState.travel('Shoot')
 		return "shoot"
+	if roll:
+		# use animation tree blendspace to apply last direction to roll animation
+		if current_state != "roll":
+			animationTree.set("parameters/Roll/blend_position", last_vector.x)
+			animationState.travel('Roll')
+			animationState.start()
+		# perform roll in directon currently facing
+		return "roll"
 
 func idle_state(last_vector):
 	# set idle animation according to last known movement direction
@@ -121,17 +133,27 @@ func jump(velocity):
 	return velocity
 
 func roll(velocity):
-	# apply upwards force if not airborne
-	if input_vector != Vector2.ZERO:
-		# use animation tree blendspace to apply direction to shooting animation
-		animationTree.set("parameters/Shoot/blend_position", input_vector)
-		animationState.travel('Shoot')
-	return velocity
+	# perform combat roll
+	current_state = "roll"
+	animationTree.set("parameters/Roll/blend_position", last_vector.x)
+	animationState.travel('Roll')
+	# roll from idle
+	if velocity.x == 0:
+		if last_vector.x > 0:
+			velocity.x = Globals.MAX_SPEED / 2
+		if last_vector.x < 0:
+			velocity.x = -(Globals.MAX_SPEED / 2)
+		return velocity
 	
+	# roll from movement
+	else:
+		# keep current movement vector if input is applied
+		animationTree.set("parameters/Roll/blend_position", input_vector.x)
+		animationState.travel('Roll')
+		return velocity
 
 func shoot(input_vector):
 	# base shoot state, animation is already initialized from get_movement_inputs()
-
 	current_state = "shoot"
 
 	# listen for keyboard input
