@@ -15,10 +15,9 @@ position = Vector2( 260.676, 146.765 )
 [node name="AnimationTree" parent="Level/Player" index="0"]
 process_mode = 0
 parameters/playback = SubResource( 1 )
-parameters/Roll/blend_position = 0.0101596
+parameters/Roll/blend_position = 0
 
 [node name="AnimationPlayer" parent="Level/Player" index="1"]
-autoplay = "IdleRight"
 method_call_mode = 1
 
 [node name="Label" type="Label" parent="Level/Player"]

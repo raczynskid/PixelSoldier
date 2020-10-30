@@ -32,6 +32,7 @@ func _physics_process(delta):
 	if current_state == "shoot":
 		velocity = shoot(input_vector)
 	elif current_state == "roll":
+
 		velocity = roll(velocity)
 	else:
 		if input_vector.x != 0:
@@ -82,12 +83,13 @@ func get_action_inputs():
 			animationTree.set("parameters/Shoot/blend_position", last_vector)
 			animationState.travel('Shoot')
 		return "shoot"
+	else:
+		idle_state(last_vector)
 	if roll:
 		# use animation tree blendspace to apply last direction to roll animation
 		if current_state != "roll":
 			animationTree.set("parameters/Roll/blend_position", last_vector.x)
-			animationState.travel('Roll')
-			animationState.start()
+			animationState.travel("Roll")
 		# perform roll in directon currently facing
 		return "roll"
 
