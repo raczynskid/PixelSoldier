@@ -32,7 +32,6 @@ func _physics_process(delta):
 	if current_state == "shoot":
 		velocity = shoot(input_vector)
 	elif current_state == "roll":
-
 		velocity = roll(velocity)
 	else:
 		if input_vector.x != 0:
@@ -153,6 +152,9 @@ func roll(velocity):
 		animationTree.set("parameters/Roll/blend_position", input_vector.x)
 		animationState.travel('Roll')
 		return velocity
+
+func end_roll():
+	return
 
 func shoot(input_vector):
 	# base shoot state, animation is already initialized from get_movement_inputs()
