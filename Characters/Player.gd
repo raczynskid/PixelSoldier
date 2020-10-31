@@ -1,15 +1,18 @@
 extends KinematicBody2D
 
+const Cooldown = preload('res://Scripts/Cooldown.gd')
+
 var states_stack = []
 var current_state = null
 var fire : float
 var roll : float
+var roll_enabled = true
 
 var velocity = Vector2.ZERO
 var input_vector = Vector2.ZERO
 var last_vector = Vector2.ZERO
 var air_acceleration = Globals.ACCELERATION / 12
-var timer = Timer.new()
+onready var roll_cooldown = Cooldown.new(3)
 
 onready var animationPlayer = get_node("AnimationPlayer")
 onready var animationTree = get_node("AnimationTree")
@@ -18,6 +21,7 @@ onready var animationState = animationTree.get("parameters/playback")
 func _ready():
 	animationTree.active = true
 	velocity = Vector2(0,0)
+	roll_cooldown.max_time = 0.3
 
 func _physics_process(delta):
 
@@ -26,7 +30,7 @@ func _physics_process(delta):
 
 	# get arrow key inputs
 	input_vector = get_movement_inputs()
-	current_state = get_action_inputs()
+	current_state = get_action_inputs(delta)
 
 	# prevent movement or idle if in shoot state
 	if current_state == "shoot":
@@ -70,7 +74,10 @@ func get_movement_inputs():
 
 	return input_vector
 
-func get_action_inputs():
+func get_action_inputs(delta):
+	# tick cooldowns
+	roll_cooldown.tick(delta)
+
 	# check for keyboard inputs for actions
 	fire = Input.get_action_strength("fire")
 	roll = Input.get_action_strength("ui_down")
@@ -85,12 +92,14 @@ func get_action_inputs():
 	else:
 		idle_state(last_vector)
 	if roll:
-		# use animation tree blendspace to apply last direction to roll animation
-		if current_state != "roll":
-			animationTree.set("parameters/Roll/blend_position", last_vector.x)
-			animationState.travel("Roll")
-		# perform roll in directon currently facing
-		return "roll"
+		# check if roll is not in cooldown
+		if roll_cooldown.is_ready():
+			# use animation tree blendspace to apply last direction to roll animation
+			if current_state != "roll":
+				animationTree.set("parameters/Roll/blend_position", last_vector.x)
+				animationState.travel("Roll")
+			# perform roll in directon currently facing
+			return "roll"
 
 func idle_state(last_vector):
 	# set idle animation according to last known movement direction
@@ -144,17 +153,32 @@ func roll(velocity):
 			velocity.x = Globals.MAX_SPEED / 2
 		if last_vector.x < 0:
 			velocity.x = -(Globals.MAX_SPEED / 2)
-		return velocity
-	
+
 	# roll from movement
 	else:
 		# keep current movement vector if input is applied
 		animationTree.set("parameters/Roll/blend_position", input_vector.x)
 		animationState.travel('Roll')
-		return velocity
+		if velocity.x != 0:
+			if last_vector.x > 0:
+				velocity.x = Globals.MAX_SPEED * 1.5
+			if last_vector.x < 0:
+				velocity.x = -(Globals.MAX_SPEED * 1.5)
+		
+	
+	return velocity
 
 func end_roll():
-	return
+	# called on animation end
+	# return to idle
+	current_state = "idle"
+	idle_state(last_vector)
+	# reset cooldown timer
+	roll_cooldown.reset()
+	# if roll ends on the floor, decrease horizontal speed to 1/3rd
+	if is_on_floor():
+		velocity.x = velocity.x / 3
+	
 
 func shoot(input_vector):
 	# base shoot state, animation is already initialized from get_movement_inputs()
@@ -168,10 +192,9 @@ func shoot(input_vector):
 	
 	# remove any horizontal speed if remaining
 	if is_on_floor():
-		if velocity.x < 0:
-			velocity.x += Globals.PLAYER_SLIDE_FACTOR / 6
-		if velocity.x > 0:
-			velocity.x -= Globals.PLAYER_SLIDE_FACTOR / 6
+		velocity.x = int(round(lerp(velocity.x, 0, 0.1)))
+		if abs(velocity.x) == 5:
+			velocity.x = 0
 	return velocity
 
 
