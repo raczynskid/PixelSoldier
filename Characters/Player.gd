@@ -6,6 +6,7 @@ var states_stack = []
 var current_state = null
 var fire : float
 var roll : float
+var slide : float
 var roll_enabled = true
 
 var velocity = Vector2.ZERO
@@ -37,6 +38,8 @@ func _physics_process(delta):
 		velocity = shoot(input_vector)
 	elif current_state == "roll":
 		velocity = roll(velocity)
+	elif current_state == "slide":
+		velocity = slide(velocity)
 	else:
 		if input_vector.x != 0:
 			# horizontal movement
@@ -81,6 +84,7 @@ func get_action_inputs(delta):
 	# check for keyboard inputs for actions
 	fire = Input.get_action_strength("fire")
 	roll = Input.get_action_strength("ui_down")
+	slide = Input.get_action_strength("slide")
 
 	# if input pressed
 	if fire:
@@ -91,6 +95,7 @@ func get_action_inputs(delta):
 		return "shoot"
 	else:
 		idle_state(last_vector)
+
 	if roll:
 		# check if roll is not in cooldown
 		if roll_cooldown.is_ready():
@@ -100,6 +105,14 @@ func get_action_inputs(delta):
 				animationState.travel("Roll")
 			# perform roll in directon currently facing
 			return "roll"
+	
+	if slide:
+		# slide only when max velocity on the floor
+		if current_state != "slide":
+			animationTree.set("parameters/Slide/blend_position", velocity.x)
+			animationState.travel("Slide")
+			# perform slide in direction of movement
+			return "slide"
 
 func idle_state(last_vector):
 	# set idle animation according to last known movement direction
@@ -178,7 +191,18 @@ func end_roll():
 	# if roll ends on the floor, decrease horizontal speed to 1/3rd
 	if is_on_floor():
 		velocity.x = velocity.x / 3
-	
+
+func slide(velocity):
+	# perform slide
+	current_state = "slide"
+	animationTree.set("parameters/Slide/blend_position", velocity.x)
+	animationState.travel('Slide')
+	if velocity.x > 0:
+		velocity.x = int(round(lerp(velocity.x, -50, 0.01)))
+	elif velocity.x < 0:
+		velocity.x = int(round(lerp(velocity.x, 50, 0.01)))
+	return velocity
+
 
 func shoot(input_vector):
 	# base shoot state, animation is already initialized from get_movement_inputs()
