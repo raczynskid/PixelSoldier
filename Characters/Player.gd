@@ -9,15 +9,22 @@ var roll : float
 var slide : float
 var roll_enabled = true
 
+# load vectors
 var velocity = Vector2.ZERO
 var input_vector = Vector2.ZERO
 var last_vector = Vector2.ZERO
 var air_acceleration = Globals.ACCELERATION / 12
+
+# load timers
 onready var roll_cooldown = Cooldown.new(3)
 
+# load animation nodes
 onready var animationPlayer = get_node("AnimationPlayer")
 onready var animationTree = get_node("AnimationTree")
 onready var animationState = animationTree.get("parameters/playback")
+
+# load misc nodes
+onready var dust = get_node("Dust")
 
 func _ready():
 	animationTree.active = true
@@ -39,7 +46,7 @@ func _physics_process(delta):
 	elif current_state == "roll":
 		velocity = roll_state(velocity)
 	elif current_state == "slide":
-		velocity = slide(velocity)
+		velocity = slide_state(velocity)
 	else:
 		if input_vector.x != 0:
 			# horizontal movement
@@ -64,7 +71,7 @@ func _physics_process(delta):
 	velocity = move_and_slide(velocity, Globals.UP)
 
 	# debug labels
-	get_node("Label").text = var2str(last_vector)
+	get_node("Label").text = var2str(input_vector)
 	get_node("Label2").text = var2str(velocity)
 	get_node("Label3").text = var2str(current_state)
 	
@@ -208,7 +215,7 @@ func end_roll():
 	if is_on_floor():
 		velocity.x = velocity.x / 3
 
-func slide(vector):
+func slide_state(vector):
 	# vector : velocity
 	# return : Vector2
 	# perform slide
