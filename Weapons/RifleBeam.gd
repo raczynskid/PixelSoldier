@@ -10,6 +10,7 @@ onready var ray = get_node("RayCast2D")
 onready var input_vector = get_parent().input_vector
 onready var last_shot_direction = Vector2.ZERO
 onready var shot_direction = Vector2(1,0)
+var max_cast_to = Vector2.ZERO
 
 # recieve signals from AnimationPlayer
 func shoot_up():
@@ -27,7 +28,10 @@ func get_shot_direction():
 func _physics_process(_delta):
 
 	# set length of raycast
-	var max_cast_to = get_shot_direction() * MAX_LENGTH
+	if shot_direction.y != 0:
+		max_cast_to = (get_shot_direction() * MAX_LENGTH) + Vector2(rand_range(-10,10),0)
+	else:
+		max_cast_to = (get_shot_direction() * MAX_LENGTH) + Vector2(0, rand_range(-10,10))
 	ray.cast_to = max_cast_to
 	
 	# set ray endpoint at first collision
