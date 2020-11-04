@@ -254,7 +254,7 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0.1 ),
+"times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "values": [ {
 "args": [  ],
@@ -284,7 +284,7 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0.1 ),
+"times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "values": [ {
 "args": [  ],
@@ -314,7 +314,7 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0.1 ),
+"times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "values": [ {
 "args": [  ],
@@ -344,7 +344,7 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0.1 ),
+"times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "values": [ {
 "args": [  ],
@@ -476,6 +476,9 @@ anims/StabRight = SubResource( 41 )
 
 [node name="Tween" type="Tween" parent="."]
 
+[node name="RifleBeam" parent="." instance=ExtResource( 1 )]
+position = Vector2( 0, -5.483 )
+
 [node name="Pivot" type="Position2D" parent="."]
 
 [node name="Body" type="Sprite" parent="Pivot"]
@@ -487,6 +490,3 @@ frame = 3
 [node name="MovementCollision" type="CollisionShape2D" parent="."]
 position = Vector2( -0.695272, -1.39242 )
 shape = SubResource( 42 )
-
-[node name="RifleBeam" parent="." instance=ExtResource( 1 )]
-position = Vector2( 0, -5.483 )

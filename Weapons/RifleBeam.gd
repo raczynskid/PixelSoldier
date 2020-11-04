@@ -27,7 +27,7 @@ func get_shot_direction():
 
 func _physics_process(_delta):
 
-	# set length of raycast
+	# set length of raycast and randomize in axis to add spread
 	if shot_direction.y != 0:
 		max_cast_to = (get_shot_direction() * MAX_LENGTH) + Vector2(rand_range(-10,10),0)
 	else:

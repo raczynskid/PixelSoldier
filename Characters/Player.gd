@@ -25,6 +25,7 @@ onready var animationState = animationTree.get("parameters/playback")
 
 # load misc nodes
 onready var dust = get_node("Dust")
+onready var beam = get_node("RifleBeam")
 
 func _ready():
 	animationTree.active = true
@@ -102,7 +103,9 @@ func get_action_inputs(delta):
 		return "shoot"
 	else:
 		idle_state(last_vector)
-
+		beam.get_node("Beam").visible = false
+		beam.get_node("End/Ricochet").emitting = false
+		
 	if roll:
 		# check if roll is not in cooldown
 		if roll_cooldown.is_ready():
@@ -241,6 +244,9 @@ func shoot(vector):
 	# base shoot state, animation is already initialized from get_movement_inputs()
 	current_state = "shoot"
 
+	# start emitting ricochet particles
+	beam.get_node("End/Ricochet").emitting = true
+
 	# listen for keyboard input
 	if vector != Vector2.ZERO:
 		# use animation tree blendspace to apply direction to shooting animation
@@ -252,6 +258,13 @@ func shoot(vector):
 		velocity.x = int(round(lerp(velocity.x, 0, 0.1)))
 		if abs(velocity.x) == 5:
 			velocity.x = 0
+	
+	# hide and show sprite of bullet trace
+	if beam.get_node("Beam").visible:
+		beam.get_node("Beam").visible = false
+	else:
+		beam.get_node("Beam").visible = true
+	
 	return velocity
 
 
