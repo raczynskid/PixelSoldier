@@ -17,6 +17,7 @@ var air_acceleration = Globals.ACCELERATION / 12
 
 # load timers
 onready var roll_cooldown = Cooldown.new(3)
+onready var beam_cooldown = Cooldown.new(0.1)
 
 # load animation nodes
 onready var animationPlayer = get_node("AnimationPlayer")
@@ -88,6 +89,7 @@ func get_movement_inputs():
 func get_action_inputs(delta):
 	# tick cooldowns
 	roll_cooldown.tick(delta)
+	beam_cooldown.tick(delta)
 
 	# check for keyboard inputs for actions
 	fire = Input.get_action_strength("fire")
@@ -96,7 +98,7 @@ func get_action_inputs(delta):
 
 	# if input pressed
 	if fire:
-		# if first shot, set animation according to last konwn movement direction
+		# if first shot, set animation according to last known movement direction
 		if current_state != "shoot":
 			animationTree.set("parameters/Shoot/blend_position", last_vector)
 			animationState.travel('Shoot')
@@ -263,7 +265,9 @@ func shoot(vector):
 	if beam.get_node("Beam").visible:
 		beam.get_node("Beam").visible = false
 	else:
-		beam.get_node("Beam").visible = true
+		if beam_cooldown.is_ready():
+			beam.get_node("Beam").visible = true
+			beam_cooldown.reset()
 	
 	return velocity
 

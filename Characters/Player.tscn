@@ -79,8 +79,6 @@ blend_point_1/pos = 0.5
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=18]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=19]
-
 [sub_resource type="AnimationNodeStateMachineTransition" id=20]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=21]
@@ -95,6 +93,8 @@ switch_mode = 2
 [sub_resource type="AnimationNodeStateMachineTransition" id=25]
 switch_mode = 2
 
+[sub_resource type="AnimationNodeStateMachineTransition" id=43]
+
 [sub_resource type="AnimationNodeStateMachine" id=26]
 states/Idle/node = SubResource( 3 )
 states/Idle/position = Vector2( 820, 92 )
@@ -106,7 +106,7 @@ states/Shoot/node = SubResource( 14 )
 states/Shoot/position = Vector2( 1284, 92 )
 states/Slide/node = SubResource( 17 )
 states/Slide/position = Vector2( 840, 388 )
-transitions = [ "Idle", "Shoot", SubResource( 18 ), "Shoot", "Idle", SubResource( 19 ), "Idle", "Run", SubResource( 20 ), "Run", "Idle", SubResource( 21 ), "Idle", "Roll", SubResource( 22 ), "Roll", "Idle", SubResource( 23 ), "Run", "Slide", SubResource( 24 ), "Slide", "Run", SubResource( 25 ) ]
+transitions = [ "Idle", "Shoot", SubResource( 18 ), "Idle", "Run", SubResource( 20 ), "Run", "Idle", SubResource( 21 ), "Idle", "Roll", SubResource( 22 ), "Roll", "Idle", SubResource( 23 ), "Run", "Slide", SubResource( 24 ), "Slide", "Run", SubResource( 25 ), "Shoot", "Idle", SubResource( 43 ) ]
 start_node = "Idle"
 graph_offset = Vector2( 210, -3 )
 
@@ -485,7 +485,7 @@ position = Vector2( 0, -5.483 )
 position = Vector2( 0, -6 )
 texture = ExtResource( 2 )
 hframes = 56
-frame = 3
+frame = 1
 
 [node name="MovementCollision" type="CollisionShape2D" parent="."]
 position = Vector2( -0.695272, -1.39242 )

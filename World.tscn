@@ -20,6 +20,9 @@ parameters/Roll/blend_position = 0.00343645
 [node name="AnimationPlayer" parent="Level/Player" index="1"]
 method_call_mode = 1
 
+[node name="Body" parent="Level/Player/Pivot" index="0"]
+frame = 6
+
 [node name="Label" type="Label" parent="Level/Player"]
 margin_left = -27.9873
 margin_top = -30.6877
