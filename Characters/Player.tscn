@@ -1,7 +1,8 @@
-[gd_scene load_steps=46 format=2]
+[gd_scene load_steps=47 format=2]
 
 [ext_resource path="res://Weapons/RifleBeam.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Spritesheets/Soldat.png" type="Texture" id=2]
+[ext_resource path="res://Characters/PlayerCamera.gd" type="Script" id=3]
 [ext_resource path="res://Characters/Player.gd" type="Script" id=7]
 
 [sub_resource type="AnimationNodeAnimation" id=1]
@@ -79,21 +80,21 @@ blend_point_1/pos = 0.5
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=18]
 
+[sub_resource type="AnimationNodeStateMachineTransition" id=19]
+
 [sub_resource type="AnimationNodeStateMachineTransition" id=20]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=21]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=22]
+switch_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=23]
-switch_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=24]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id=25]
 switch_mode = 2
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=43]
+[sub_resource type="AnimationNodeStateMachineTransition" id=25]
 
 [sub_resource type="AnimationNodeStateMachine" id=26]
 states/Idle/node = SubResource( 3 )
@@ -106,7 +107,7 @@ states/Shoot/node = SubResource( 14 )
 states/Shoot/position = Vector2( 1284, 92 )
 states/Slide/node = SubResource( 17 )
 states/Slide/position = Vector2( 840, 388 )
-transitions = [ "Idle", "Shoot", SubResource( 18 ), "Idle", "Run", SubResource( 20 ), "Run", "Idle", SubResource( 21 ), "Idle", "Roll", SubResource( 22 ), "Roll", "Idle", SubResource( 23 ), "Run", "Slide", SubResource( 24 ), "Slide", "Run", SubResource( 25 ), "Shoot", "Idle", SubResource( 43 ) ]
+transitions = [ "Idle", "Shoot", SubResource( 18 ), "Idle", "Run", SubResource( 19 ), "Run", "Idle", SubResource( 20 ), "Idle", "Roll", SubResource( 21 ), "Roll", "Idle", SubResource( 22 ), "Run", "Slide", SubResource( 23 ), "Slide", "Run", SubResource( 24 ), "Shoot", "Idle", SubResource( 25 ) ]
 start_node = "Idle"
 graph_offset = Vector2( 210, -3 )
 
@@ -115,7 +116,7 @@ graph_offset = Vector2( 210, -3 )
 [sub_resource type="Animation" id=28]
 length = 0.2
 tracks/0/type = "value"
-tracks/0/path = NodePath("Pivot/Body:frame")
+tracks/0/path = NodePath("Body:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -130,7 +131,7 @@ tracks/0/keys = {
 [sub_resource type="Animation" id=29]
 length = 0.2
 tracks/0/type = "value"
-tracks/0/path = NodePath("Pivot/Body:frame")
+tracks/0/path = NodePath("Body:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -145,7 +146,7 @@ tracks/0/keys = {
 [sub_resource type="Animation" id=30]
 length = 0.4
 tracks/0/type = "value"
-tracks/0/path = NodePath("Pivot/Body:frame")
+tracks/0/path = NodePath("Body:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -174,7 +175,7 @@ tracks/1/keys = {
 [sub_resource type="Animation" id=31]
 length = 0.4
 tracks/0/type = "value"
-tracks/0/path = NodePath("Pivot/Body:frame")
+tracks/0/path = NodePath("Body:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -204,7 +205,7 @@ tracks/1/keys = {
 length = 0.3
 loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath("Pivot/Body:frame")
+tracks/0/path = NodePath("Body:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -220,7 +221,7 @@ tracks/0/keys = {
 length = 0.3
 loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath("Pivot/Body:frame")
+tracks/0/path = NodePath("Body:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -236,7 +237,7 @@ tracks/0/keys = {
 length = 0.3
 loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath("Pivot/Body:frame")
+tracks/0/path = NodePath("Body:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -261,12 +262,26 @@ tracks/1/keys = {
 "method": "shoot_left"
 } ]
 }
+tracks/2/type = "method"
+tracks/2/path = NodePath("Pivot")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.1 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "shoot_left"
+} ]
+}
 
 [sub_resource type="Animation" id=35]
 length = 0.3
 loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath("Pivot/Body:frame")
+tracks/0/path = NodePath("Body:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -291,12 +306,26 @@ tracks/1/keys = {
 "method": "shoot_right"
 } ]
 }
+tracks/2/type = "method"
+tracks/2/path = NodePath("Pivot")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.1 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "shoot_right"
+} ]
+}
 
 [sub_resource type="Animation" id=36]
 length = 0.3
 loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath("Pivot/Body:frame")
+tracks/0/path = NodePath("Body:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -321,12 +350,26 @@ tracks/1/keys = {
 "method": "shoot_up"
 } ]
 }
+tracks/2/type = "method"
+tracks/2/path = NodePath("Pivot")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.1 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "shoot_up"
+} ]
+}
 
 [sub_resource type="Animation" id=37]
 length = 0.3
 loop = true
 tracks/0/type = "value"
-tracks/0/path = NodePath("Pivot/Body:frame")
+tracks/0/path = NodePath("Body:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -351,11 +394,25 @@ tracks/1/keys = {
 "method": "shoot_up"
 } ]
 }
+tracks/2/type = "method"
+tracks/2/path = NodePath("Pivot")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.1 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "shoot_up"
+} ]
+}
 
 [sub_resource type="Animation" id=38]
 length = 0.4
 tracks/0/type = "value"
-tracks/0/path = NodePath("Pivot/Body:frame")
+tracks/0/path = NodePath("Body:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -384,7 +441,7 @@ tracks/1/keys = {
 [sub_resource type="Animation" id=39]
 length = 0.4
 tracks/0/type = "value"
-tracks/0/path = NodePath("Pivot/Body:frame")
+tracks/0/path = NodePath("Body:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -413,7 +470,7 @@ tracks/1/keys = {
 [sub_resource type="Animation" id=40]
 length = 0.6
 tracks/0/type = "value"
-tracks/0/path = NodePath("Pivot/Body:frame")
+tracks/0/path = NodePath("Body:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -428,7 +485,7 @@ tracks/0/keys = {
 [sub_resource type="Animation" id=41]
 length = 0.6
 tracks/0/type = "value"
-tracks/0/path = NodePath("Pivot/Body:frame")
+tracks/0/path = NodePath("Body:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -479,13 +536,27 @@ anims/StabRight = SubResource( 41 )
 [node name="RifleBeam" parent="." instance=ExtResource( 1 )]
 position = Vector2( 0, -5.483 )
 
-[node name="Pivot" type="Position2D" parent="."]
-
-[node name="Body" type="Sprite" parent="Pivot"]
+[node name="Body" type="Sprite" parent="."]
 position = Vector2( 0, -6 )
 texture = ExtResource( 2 )
 hframes = 56
-frame = 1
+frame = 3
+
+[node name="Pivot" type="Position2D" parent="."]
+script = ExtResource( 3 )
+
+[node name="CameraOffset" type="Position2D" parent="Pivot"]
+position = Vector2( 61.5549, -0.613617 )
+
+[node name="Camera2D" type="Camera2D" parent="Pivot/CameraOffset"]
+position = Vector2( 1.57489, 0.944946 )
+current = true
+zoom = Vector2( 0.3, 0.3 )
+drag_margin_h_enabled = true
+drag_margin_v_enabled = true
+smoothing_enabled = true
+drag_margin_top = 0.5
+editor_draw_drag_margin = true
 
 [node name="MovementCollision" type="CollisionShape2D" parent="."]
 position = Vector2( -0.695272, -1.39242 )
