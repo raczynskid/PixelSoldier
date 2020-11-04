@@ -25,7 +25,6 @@ onready var animationTree = get_node("AnimationTree")
 onready var animationState = animationTree.get("parameters/playback")
 
 # load misc nodes
-onready var dust = get_node("Dust")
 onready var beam = get_node("RifleBeam")
 
 func _ready():
@@ -43,6 +42,7 @@ func _physics_process(delta):
 	current_state = get_action_inputs(delta)
 
 	# prevent movement or idle if in shoot state
+	# call methods based on state machine
 	if current_state == "shoot":
 		velocity = shoot(input_vector)
 	elif current_state == "roll":
@@ -50,15 +50,20 @@ func _physics_process(delta):
 	elif current_state == "slide":
 		velocity = slide_state(velocity)
 	else:
+		# if no action state is applied
+		# but movement controls are pressed
+		# go into movement state
 		if input_vector.x != 0:
 			# horizontal movement
 			velocity = movement_state(input_vector)
-			# update to keep direction
+			# update to keep facing last movement direction
+			# can be overwritten by animation method calls
 			last_vector = input_vector
 		else:
 			# stop horizontal movement based on friction
 			if is_on_floor():
 				velocity.x = int(round(lerp(velocity.x, 0, 0.25)))
+				# shed remainder of velocity regardless of direction
 				if abs(velocity.x) == 2:
 					velocity.x = 0
 			else:
@@ -74,12 +79,12 @@ func _physics_process(delta):
 
 	# debug labels
 	get_node("Label").text = var2str(input_vector)
-	get_node("Label2").text = var2str(velocity)
+	get_node("Label2").text = var2str(last_vector)
 	get_node("Label3").text = var2str(current_state)
 	
 
 func get_movement_inputs():
-	# get currnet movement vector from keyobard inptus
+	# get current movement vector from keyobard inptus
 	input_vector.x = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
 	input_vector.y = Input.get_action_strength("ui_up") - Input.get_action_strength("ui_down")
 	input_vector = input_vector.normalized()

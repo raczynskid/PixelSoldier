@@ -29,9 +29,13 @@ func _physics_process(_delta):
 
 	# set length of raycast and randomize in axis to add spread
 	if shot_direction.y != 0:
+		# horizontal spread when shooting up
 		max_cast_to = (get_shot_direction() * MAX_LENGTH) + Vector2(rand_range(-10,10),0)
 	else:
+		# vertical spread when shooting sideways
 		max_cast_to = (get_shot_direction() * MAX_LENGTH) + Vector2(0, rand_range(-10,10))
+	
+	# send the raycast to max length looking for collisions
 	ray.cast_to = max_cast_to
 	
 	# set ray endpoint at first collision
