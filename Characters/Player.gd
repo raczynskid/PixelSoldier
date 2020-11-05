@@ -54,15 +54,18 @@ func _physics_process(delta):
 		# but movement controls are pressed
 		# go into movement state
 		if input_vector.x != 0:
+
 			# horizontal movement
 			velocity = movement_state(input_vector)
+
 			# update to keep facing last movement direction
 			# can be overwritten by animation method calls
 			last_vector = input_vector
 		else:
-			# stop horizontal movement based on friction
+			# stop horizontal movement based on friction if grounded
 			if is_on_floor():
 				velocity.x = int(round(lerp(velocity.x, 0, 0.25)))
+
 				# shed remainder of velocity regardless of direction
 				if abs(velocity.x) == 2:
 					velocity.x = 0
@@ -78,8 +81,8 @@ func _physics_process(delta):
 	velocity = move_and_slide(velocity, Globals.UP)
 
 	# debug labels
-	get_node("Label").text = var2str(input_vector)
-	get_node("Label2").text = var2str(last_vector)
+	get_node("Label").text = "input " + var2str(input_vector.x)
+	get_node("Label2").text = "last " + var2str(last_vector.x)
 	get_node("Label3").text = var2str(current_state)
 	
 
@@ -193,6 +196,7 @@ func roll_state(vector):
 	current_state = "roll"
 	animationTree.set("parameters/Roll/blend_position", last_vector.x)
 	animationState.travel('Roll')
+
 	# roll from idle
 	if vector.x == 0:
 		if last_vector.x > 0:
@@ -205,6 +209,8 @@ func roll_state(vector):
 		# keep current movement vector if input is applied
 		animationTree.set("parameters/Roll/blend_position", input_vector.x)
 		animationState.travel('Roll')
+
+		# slightly increase speed for duration of roll
 		if vector.x != 0:
 			if last_vector.x > 0:
 				vector.x = Globals.MAX_SPEED * 1.5
@@ -217,10 +223,10 @@ func roll_state(vector):
 func end_roll():
 	# called on animation end
 	# return to idle
-	#current_state = "idle"
-	#idle_state(last_vector)
+
 	# reset cooldown timer
 	roll_cooldown.reset()
+
 	# if roll ends on the floor, decrease horizontal speed to 1/3rd
 	if is_on_floor():
 		velocity.x = velocity.x / 3
@@ -229,11 +235,14 @@ func slide_state(vector):
 	# vector : velocity
 	# return : Vector2
 	# perform slide
+
 	# set state
 	current_state = "slide"
+
 	# set animation blend
 	animationTree.set("parameters/Slide/blend_position", vector.x)
 	animationState.travel('Slide')
+
 	# shed horizontal speed
 	if vector.x > 0:
 		vector.x = int(round(lerp(vector.x, -50, 0.01)))
@@ -248,6 +257,7 @@ func end_slide():
 func shoot(vector):
 	# vector : input_vector
 	# return : Vector2
+
 	# base shoot state, animation is already initialized from get_movement_inputs()
 	current_state = "shoot"
 
@@ -256,6 +266,7 @@ func shoot(vector):
 
 	# listen for keyboard input
 	if vector != Vector2.ZERO:
+
 		# use animation tree blendspace to apply direction to shooting animation
 		animationTree.set("parameters/Shoot/blend_position", vector)
 		animationState.travel('Shoot')
@@ -263,6 +274,7 @@ func shoot(vector):
 	# remove any horizontal speed if remaining
 	if is_on_floor():
 		velocity.x = int(round(lerp(velocity.x, 0, 0.1)))
+		# drop remaining velocity
 		if abs(velocity.x) == 5:
 			velocity.x = 0
 	
@@ -270,6 +282,7 @@ func shoot(vector):
 	if beam.get_node("Beam").visible:
 		beam.get_node("Beam").visible = false
 	else:
+		# wait for timer for slower flicker
 		if beam_cooldown.is_ready():
 			beam.get_node("Beam").visible = true
 			beam_cooldown.reset()

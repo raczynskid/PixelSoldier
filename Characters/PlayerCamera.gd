@@ -24,6 +24,12 @@ func shoot_right():
 
 func update_pivot_angle():
 
+	# if not in shooting state,
+	# pre-set camera to last player vector
+	# avoids camera shake on shooting after pivot
+	if player.current_state != "shoot":
+		shot_direction.x = player.last_vector.x
+
 	# update camera pivot dynamically
 	# if player is in shooting state
 	if player.current_state == "shoot":
@@ -37,6 +43,7 @@ func update_pivot_angle():
 		# might need a rework for encapsulation
 		# (affecting parent state)
 		player.last_vector = camera_vector
+
 	else:
 
 		# if player is in movement state set camera vector
@@ -45,4 +52,4 @@ func update_pivot_angle():
 	
 	# apply the rotation to camera
 	rotation = camera_vector.angle()
-
+	

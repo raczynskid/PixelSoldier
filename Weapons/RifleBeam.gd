@@ -7,8 +7,7 @@ const MAX_LENGTH = 500
 onready var beam = get_node("Beam")
 onready var end = get_node("End")
 onready var ray = get_node("RayCast2D")
-onready var input_vector = get_parent().input_vector
-onready var last_shot_direction = Vector2.ZERO
+onready var player = get_parent()
 onready var shot_direction = Vector2(1,0)
 var max_cast_to = Vector2.ZERO
 
@@ -26,6 +25,12 @@ func get_shot_direction():
 	return shot_direction 
 
 func _physics_process(_delta):
+
+	# make sure that first shot after pivoting
+	# is based on last character position,
+	# not animation sprite
+	if player.current_state != "shoot":
+		shot_direction.x = player.last_vector.x
 
 	# set length of raycast and randomize in axis to add spread
 	if shot_direction.y != 0:
