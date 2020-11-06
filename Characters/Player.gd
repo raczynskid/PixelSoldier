@@ -8,6 +8,7 @@ var fire : float
 var roll : float
 var slide : float
 var roll_enabled = true
+var can_shoot = true
 
 # load vectors
 var velocity = Vector2.ZERO
@@ -106,11 +107,13 @@ func get_action_inputs(delta):
 
 	# if input pressed
 	if fire:
-		# if first shot, set animation according to last known movement direction
-		if current_state != "shoot":
-			animationTree.set("parameters/Shoot/blend_position", last_vector)
-			animationState.travel('Shoot')
-		return "shoot"
+		# check if shooting enabled
+		if can_shoot:
+			# if first shot, set animation according to last known movement direction
+			if current_state != "shoot":
+				animationTree.set("parameters/Shoot/blend_position", last_vector)
+				animationState.travel('Shoot')
+			return "shoot"
 	else:
 		idle_state(last_vector)
 		beam.get_node("Beam").visible = false
@@ -197,6 +200,9 @@ func roll_state(vector):
 	animationTree.set("parameters/Roll/blend_position", last_vector.x)
 	animationState.travel('Roll')
 
+	# disable shooting for time of roll
+	can_shoot = false
+
 	# roll from idle
 	if vector.x == 0:
 		if last_vector.x > 0:
@@ -230,6 +236,9 @@ func end_roll():
 	# if roll ends on the floor, decrease horizontal speed to 1/3rd
 	if is_on_floor():
 		velocity.x = velocity.x / 3
+
+	# reenable shooting
+	can_shoot = true
 
 func slide_state(vector):
 	# vector : velocity
