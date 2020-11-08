@@ -1,7 +1,7 @@
 extends Node2D
 
 # set signals
-signal hit_by_rifle(object)
+signal _on_hit_by_rifle(object)
 
 # set max length of raycast
 const MAX_LENGTH = 500
@@ -62,7 +62,7 @@ func _physics_process(_delta):
 			if current_collider.is_in_group("enemies"):
 
 				# emit signal if enemy was hit
-				emit_signal("hit_by_rifle", current_collider) 
+				emit_signal("_on_hit_by_rifle", current_collider) 
 			
 			# placeholder for destructible environment objects
 			else:

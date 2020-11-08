@@ -6,9 +6,9 @@ onready var player = get_parent().get_node("Player")
 onready var rifle_beam = player.get_node("RifleBeam")
 
 func _ready():
-	rifle_beam.connect("hit_by_rifle", self, "_hit_by_rifle")
+	rifle_beam.connect("_on_hit_by_rifle", self, "_on_hit_by_rifle")
 
-func _hit_by_rifle(object):
+func _on_hit_by_rifle(object):
 	if not dead:
 		# check if instance being collided
 		# with is self

@@ -78,6 +78,7 @@ position = Vector2( 434.557, 538.01 )
 
 [node name="KinematicBody2D2" parent="Level" instance=ExtResource( 3 )]
 position = Vector2( 493.366, 537.635 )
+[connection signal="hit_by_rifle" from="Level/Player/RifleBeam" to="Level/Player/RifleBeam" method="_on_hit_by_rifle"]
 
 [editable path="Level/Player"]
 
