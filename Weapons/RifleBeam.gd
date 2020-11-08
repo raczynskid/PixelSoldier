@@ -1,5 +1,8 @@
 extends Node2D
 
+# set signals
+signal hit_by_rifle(object)
+
 # set max length of raycast
 const MAX_LENGTH = 500
 
@@ -10,6 +13,7 @@ onready var ray = get_node("RayCast2D")
 onready var player = get_parent()
 onready var shot_direction = Vector2(1,0)
 var max_cast_to = Vector2.ZERO
+var current_collider = null
 
 # recieve signals from AnimationPlayer
 func shoot_up():
@@ -43,9 +47,34 @@ func _physics_process(_delta):
 	# send the raycast to max length looking for collisions
 	ray.cast_to = max_cast_to
 	
-	# set ray endpoint at first collision
+	# check for collisions with raycast
 	if ray.is_colliding():
+		# set ray endpoint at first collision
 		end.global_position = ray.get_collision_point()
+
+		# if player is in firing mode check
+		# what object is being collided with
+		if player.current_state == "shoot":
+			# set ray endpoint at first collision
+			current_collider = ray.get_collider()
+		
+			# check if collision target is in enemies group
+			if current_collider.is_in_group("enemies"):
+
+				# emit signal if enemy was hit
+				emit_signal("hit_by_rifle", current_collider) 
+			
+			# placeholder for destructible environment objects
+			else:
+				pass
+		
+		# placeholder for enemies or objects reacting 
+		# to being aimed at
+		else:
+			pass
+	
+	# if no collision set endpoint at max raycast length
+	# (max weapon range)
 	else:
 		end.global_position = ray.cast_to
 	

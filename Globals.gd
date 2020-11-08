@@ -8,5 +8,6 @@ const JUMPFORCE = 250
 const BULLETSPEED = 900
 
 const PLAYER_SLIDE_FACTOR = 20
+const RIFLE_DMG = 1
 
 const UP = Vector2(0, -1)
