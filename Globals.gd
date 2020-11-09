@@ -11,3 +11,6 @@ const PLAYER_SLIDE_FACTOR = 20
 const RIFLE_DMG = 1
 
 const UP = Vector2(0, -1)
+
+# weapon settings
+const RIFLE_MAX_AMMO = 30

@@ -61,8 +61,10 @@ func _physics_process(_delta):
 			# check if collision target is in enemies group
 			if current_collider.is_in_group("enemies"):
 
-				# emit signal if enemy was hit
-				emit_signal("_on_hit_by_rifle", current_collider) 
+				# check if player has ammo
+				if player.ammo > 0:
+					# emit signal if enemy was hit
+					emit_signal("_on_hit_by_rifle", current_collider) 
 			
 			# placeholder for destructible environment objects
 			else:

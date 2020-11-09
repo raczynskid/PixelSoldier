@@ -9,6 +9,7 @@ var roll : float
 var slide : float
 var roll_enabled = true
 var can_shoot = true
+var ammo = Globals.RIFLE_MAX_AMMO
 
 # load vectors
 var velocity = Vector2.ZERO
@@ -45,7 +46,7 @@ func _physics_process(delta):
 	# prevent movement or idle if in shoot state
 	# call methods based on state machine
 	if current_state == "shoot":
-		velocity = shoot(input_vector)
+		velocity = shoot(input_vector, delta)
 	elif current_state == "roll":
 		velocity = roll_state(velocity)
 	elif current_state == "slide":
@@ -82,7 +83,7 @@ func _physics_process(delta):
 	velocity = move_and_slide(velocity, Globals.UP)
 
 	# debug labels
-	get_node("Label").text = "input " + var2str(input_vector.x)
+	get_node("Label").text = "ammo " + var2str(ammo)
 	get_node("Label2").text = "last " + var2str(last_vector.x)
 	get_node("Label3").text = var2str(current_state)
 	
@@ -263,39 +264,52 @@ func slide_state(vector):
 func end_slide():
 	pass
 
-func shoot(vector):
+func shed_speed(vector):
+	# vector : velocity
+	# return : Vector2
+	# remove any horizontal speed if remaining
+	if is_on_floor():
+		vector.x = int(round(lerp(vector.x, 0, 0.1)))
+		# drop remaining velocity
+		if abs(vector.x) == 5:
+			vector.x = 0
+	
+	return vector
+
+func shoot(vector, delta):
 	# vector : input_vector
 	# return : Vector2
 
 	# base shoot state, animation is already initialized from get_movement_inputs()
 	current_state = "shoot"
 
-	# start emitting ricochet particles
-	beam.get_node("End/Ricochet").emitting = true
+	if ammo > 0:
 
-	# listen for keyboard input
-	if vector != Vector2.ZERO:
+		# start emitting ricochet particles
+		beam.get_node("End/Ricochet").emitting = true
 
-		# use animation tree blendspace to apply direction to shooting animation
-		animationTree.set("parameters/Shoot/blend_position", vector)
-		animationState.travel('Shoot')
+		# listen for keyboard input
+		if vector != Vector2.ZERO:
+
+			# use animation tree blendspace to apply direction to shooting animation
+			animationTree.set("parameters/Shoot/blend_position", vector)
+			animationState.travel('Shoot')
+		
+		# hide and show sprite of bullet trace
+		if beam.get_node("Beam").visible:
+			beam.get_node("Beam").visible = false
+		else:
+			# wait for timer for slower flicker
+			if beam_cooldown.is_ready():
+				beam.get_node("Beam").visible = true
+				beam_cooldown.reset()
+		
+		ammo -= 1
 	
-	# remove any horizontal speed if remaining
-	if is_on_floor():
-		velocity.x = int(round(lerp(velocity.x, 0, 0.1)))
-		# drop remaining velocity
-		if abs(velocity.x) == 5:
-			velocity.x = 0
-	
-	# hide and show sprite of bullet trace
-	if beam.get_node("Beam").visible:
-		beam.get_node("Beam").visible = false
 	else:
-		# wait for timer for slower flicker
-		if beam_cooldown.is_ready():
-			beam.get_node("Beam").visible = true
-			beam_cooldown.reset()
+		# stop emitting particles
+		beam.get_node("End/Ricochet").emitting = false
 	
-	return velocity
+	return shed_speed(velocity)
 
 
