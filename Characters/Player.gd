@@ -7,6 +7,8 @@ var current_state = null
 var fire : float
 var roll : float
 var slide : float
+var force_reload : float
+var reload : bool
 var roll_enabled = true
 var can_shoot = true
 var ammo = Globals.RIFLE_MAX_AMMO
@@ -15,11 +17,12 @@ var ammo = Globals.RIFLE_MAX_AMMO
 var velocity = Vector2.ZERO
 var input_vector = Vector2.ZERO
 var last_vector = Vector2.ZERO
-var air_acceleration = Globals.ACCELERATION / 12
+var air_acceleration = float(Globals.ACCELERATION) / 12
 
 # load timers
 onready var roll_cooldown = Cooldown.new(3)
 onready var beam_cooldown = Cooldown.new(0.1)
+onready var reload_cooldown = Cooldown.new(2)
 
 # load animation nodes
 onready var animationPlayer = get_node("AnimationPlayer")
@@ -33,6 +36,7 @@ func _ready():
 	animationTree.active = true
 	velocity = Vector2(0,0)
 	roll_cooldown.max_time = 0.3
+	reload_cooldown.reset()
 
 func _physics_process(delta):
 
@@ -47,6 +51,8 @@ func _physics_process(delta):
 	# call methods based on state machine
 	if current_state == "shoot":
 		velocity = shoot(input_vector, delta)
+	elif current_state == "reload":
+		velocity = reload_rifle(input_vector, delta)
 	elif current_state == "roll":
 		velocity = roll_state(velocity)
 	elif current_state == "slide":
@@ -84,7 +90,7 @@ func _physics_process(delta):
 
 	# debug labels
 	get_node("Label").text = "ammo " + var2str(ammo)
-	get_node("Label2").text = "last " + var2str(last_vector.x)
+	get_node("Label2").text = "reload in" + var2str(stepify(reload_cooldown.time, 0.01))
 	get_node("Label3").text = var2str(current_state)
 	
 
@@ -105,9 +111,27 @@ func get_action_inputs(delta):
 	fire = Input.get_action_strength("fire")
 	roll = Input.get_action_strength("ui_down")
 	slide = Input.get_action_strength("slide")
+	force_reload = Input.is_action_just_pressed("reload")
+
+	# force reload state on input
+	if force_reload:
+		ammo = 0
+	
+	# check for contextual states
+	reload = (ammo <= 0) and (velocity.x == 0)
+	
+	if reload:
+		# if player is currently reloading, set animation to idle
+		animationTree.set("parameters/Idle/blend_position", last_vector.x)
+		animationState.travel('Idle')
+		beam.get_node("End/Ricochet").emitting = false
+		return "reload"
+	elif (ammo <= 0) and (input_vector == Vector2.ZERO):
+		# if player moves when reloading reset timer
+		reload_cooldown.reset()
 
 	# if input pressed
-	if fire:
+	if fire and ammo > 0:
 		# check if shooting enabled
 		if can_shoot:
 			# if first shot, set animation according to last known movement direction
@@ -207,9 +231,9 @@ func roll_state(vector):
 	# roll from idle
 	if vector.x == 0:
 		if last_vector.x > 0:
-			vector.x = Globals.MAX_SPEED / 2
+			vector.x = float(Globals.MAX_SPEED) / 2
 		if last_vector.x < 0:
-			vector.x = -(Globals.MAX_SPEED / 2)
+			vector.x = -(float(Globals.MAX_SPEED) / 2)
 
 	# roll from movement
 	else:
@@ -276,13 +300,14 @@ func shed_speed(vector):
 	
 	return vector
 
-func shoot(vector, delta):
+func shoot(vector, _delta):
 	# vector : input_vector
 	# return : Vector2
 
 	# base shoot state, animation is already initialized from get_movement_inputs()
 	current_state = "shoot"
 
+	# only shoot if player has ammo
 	if ammo > 0:
 
 		# start emitting ricochet particles
@@ -304,6 +329,7 @@ func shoot(vector, delta):
 				beam.get_node("Beam").visible = true
 				beam_cooldown.reset()
 		
+		# decrease ammo count on shot
 		ammo -= 1
 	
 	else:
@@ -312,4 +338,36 @@ func shoot(vector, delta):
 	
 	return shed_speed(velocity)
 
+func reload_rifle(vector, delta):
+	# vector : input_vector
+	# return : Vector2
+
+	# reload handling
+	# reloading only happens when stationary
+
+	# stay in reload state
+	current_state = "reload"
+	
+	# check if reloaded
+	if reload_cooldown.is_ready():
+
+		# reset ammo count
+		ammo = Globals.RIFLE_MAX_AMMO
+
+		# reset timer
+		reload_cooldown.reset()
+
+		# exit reload state
+		current_state = "idle"
+
+	else: 
+		# if not tick timer down
+		reload_cooldown.tick(delta)
+	
+	# allow movement to break state
+	if input_vector != Vector2.ZERO:
+		velocity = movement_state(vector)
+
+	return velocity
+		
 
