@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=2]
+[gd_scene load_steps=53 format=2]
 
 [ext_resource path="res://Weapons/RifleBeam.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Spritesheets/Soldat.png" type="Texture" id=2]
@@ -78,25 +78,44 @@ blend_point_0/pos = -0.5
 blend_point_1/node = SubResource( 16 )
 blend_point_1/pos = 0.5
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=18]
+[sub_resource type="AnimationNodeAnimation" id=18]
+animation = "StabLeft"
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=19]
+[sub_resource type="AnimationNodeAnimation" id=19]
+animation = "StabRight"
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=20]
+[sub_resource type="AnimationNodeBlendSpace1D" id=20]
+blend_point_0/node = SubResource( 18 )
+blend_point_0/pos = -0.5
+blend_point_1/node = SubResource( 19 )
+blend_point_1/pos = 0.5
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=21]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=22]
-switch_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=23]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=24]
-switch_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=25]
+switch_mode = 2
 
-[sub_resource type="AnimationNodeStateMachine" id=26]
+[sub_resource type="AnimationNodeStateMachineTransition" id=26]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=27]
+switch_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=28]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=29]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=30]
+switch_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=31]
+
+[sub_resource type="AnimationNodeStateMachine" id=32]
 states/Idle/node = SubResource( 3 )
 states/Idle/position = Vector2( 820, 92 )
 states/Roll/node = SubResource( 6 )
@@ -107,13 +126,15 @@ states/Shoot/node = SubResource( 14 )
 states/Shoot/position = Vector2( 1284, 92 )
 states/Slide/node = SubResource( 17 )
 states/Slide/position = Vector2( 840, 388 )
-transitions = [ "Idle", "Shoot", SubResource( 18 ), "Idle", "Run", SubResource( 19 ), "Run", "Idle", SubResource( 20 ), "Idle", "Roll", SubResource( 21 ), "Roll", "Idle", SubResource( 22 ), "Run", "Slide", SubResource( 23 ), "Slide", "Run", SubResource( 24 ), "Shoot", "Idle", SubResource( 25 ) ]
+states/Stab/node = SubResource( 20 )
+states/Stab/position = Vector2( 1451, 229 )
+transitions = [ "Idle", "Shoot", SubResource( 21 ), "Idle", "Run", SubResource( 22 ), "Run", "Idle", SubResource( 23 ), "Idle", "Roll", SubResource( 24 ), "Roll", "Idle", SubResource( 25 ), "Run", "Slide", SubResource( 26 ), "Slide", "Run", SubResource( 27 ), "Shoot", "Idle", SubResource( 28 ), "Idle", "Stab", SubResource( 29 ), "Stab", "Idle", SubResource( 30 ), "Run", "Stab", SubResource( 31 ) ]
 start_node = "Idle"
-graph_offset = Vector2( 210, -3 )
+graph_offset = Vector2( -122, 17 )
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id=27]
+[sub_resource type="AnimationNodeStateMachinePlayback" id=33]
 
-[sub_resource type="Animation" id=28]
+[sub_resource type="Animation" id=34]
 length = 0.2
 tracks/0/type = "value"
 tracks/0/path = NodePath("Body:frame")
@@ -128,7 +149,7 @@ tracks/0/keys = {
 "values": [ 34 ]
 }
 
-[sub_resource type="Animation" id=29]
+[sub_resource type="Animation" id=35]
 length = 0.2
 tracks/0/type = "value"
 tracks/0/path = NodePath("Body:frame")
@@ -143,7 +164,7 @@ tracks/0/keys = {
 "values": [ 6 ]
 }
 
-[sub_resource type="Animation" id=30]
+[sub_resource type="Animation" id=36]
 length = 0.4
 tracks/0/type = "value"
 tracks/0/path = NodePath("Body:frame")
@@ -172,7 +193,7 @@ tracks/1/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=31]
+[sub_resource type="Animation" id=37]
 length = 0.4
 tracks/0/type = "value"
 tracks/0/path = NodePath("Body:frame")
@@ -201,7 +222,7 @@ tracks/1/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=32]
+[sub_resource type="Animation" id=38]
 length = 0.3
 loop = true
 tracks/0/type = "value"
@@ -217,7 +238,7 @@ tracks/0/keys = {
 "values": [ 33, 34 ]
 }
 
-[sub_resource type="Animation" id=33]
+[sub_resource type="Animation" id=39]
 length = 0.3
 loop = true
 tracks/0/type = "value"
@@ -233,7 +254,7 @@ tracks/0/keys = {
 "values": [ 5, 6 ]
 }
 
-[sub_resource type="Animation" id=34]
+[sub_resource type="Animation" id=40]
 length = 0.3
 loop = true
 tracks/0/type = "value"
@@ -277,7 +298,7 @@ tracks/2/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=35]
+[sub_resource type="Animation" id=41]
 length = 0.3
 loop = true
 tracks/0/type = "value"
@@ -321,7 +342,7 @@ tracks/2/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=36]
+[sub_resource type="Animation" id=42]
 length = 0.3
 loop = true
 tracks/0/type = "value"
@@ -365,7 +386,7 @@ tracks/2/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=37]
+[sub_resource type="Animation" id=43]
 length = 0.3
 loop = true
 tracks/0/type = "value"
@@ -409,7 +430,7 @@ tracks/2/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=38]
+[sub_resource type="Animation" id=44]
 length = 0.4
 tracks/0/type = "value"
 tracks/0/path = NodePath("Body:frame")
@@ -438,7 +459,7 @@ tracks/1/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=39]
+[sub_resource type="Animation" id=45]
 length = 0.4
 tracks/0/type = "value"
 tracks/0/path = NodePath("Body:frame")
@@ -467,8 +488,8 @@ tracks/1/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=40]
-length = 0.6
+[sub_resource type="Animation" id=46]
+length = 0.7
 tracks/0/type = "value"
 tracks/0/path = NodePath("Body:frame")
 tracks/0/interp = 1
@@ -481,9 +502,23 @@ tracks/0/keys = {
 "update": 1,
 "values": [ 41, 42, 43, 44, 45, 46 ]
 }
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.7 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "end_stab"
+} ]
+}
 
-[sub_resource type="Animation" id=41]
-length = 0.6
+[sub_resource type="Animation" id=47]
+length = 0.7
 tracks/0/type = "value"
 tracks/0/path = NodePath("Body:frame")
 tracks/0/interp = 1
@@ -496,40 +531,55 @@ tracks/0/keys = {
 "update": 1,
 "values": [ 13, 14, 15, 16, 17, 18 ]
 }
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.7 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "end_stab"
+} ]
+}
 
-[sub_resource type="RectangleShape2D" id=42]
+[sub_resource type="RectangleShape2D" id=48]
 extents = Vector2( 3.31332, 1.21858 )
 
 [node name="Player" type="KinematicBody2D"]
 script = ExtResource( 7 )
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
-tree_root = SubResource( 26 )
+tree_root = SubResource( 32 )
 anim_player = NodePath("../AnimationPlayer")
 active = true
-parameters/playback = SubResource( 27 )
+parameters/playback = SubResource( 33 )
 parameters/Idle/blend_position = -0.0127971
 parameters/Roll/blend_position = 0
 parameters/Run/blend_position = 0
 parameters/Shoot/blend_position = Vector2( 0.000624657, 0.00619197 )
 parameters/Slide/blend_position = 0
+parameters/Stab/blend_position = -0.00218683
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 playback_process_mode = 0
-anims/IdleLeft = SubResource( 28 )
-anims/IdleRight = SubResource( 29 )
-anims/RollLeft = SubResource( 30 )
-anims/RollRight = SubResource( 31 )
-anims/RunLeft = SubResource( 32 )
-anims/RunRight = SubResource( 33 )
-anims/ShootLeft = SubResource( 34 )
-anims/ShootRight = SubResource( 35 )
-anims/ShootUpLeft = SubResource( 36 )
-anims/ShootUpRight = SubResource( 37 )
-anims/SlideLeft = SubResource( 38 )
-anims/SlideRight = SubResource( 39 )
-anims/StabLeft = SubResource( 40 )
-anims/StabRight = SubResource( 41 )
+anims/IdleLeft = SubResource( 34 )
+anims/IdleRight = SubResource( 35 )
+anims/RollLeft = SubResource( 36 )
+anims/RollRight = SubResource( 37 )
+anims/RunLeft = SubResource( 38 )
+anims/RunRight = SubResource( 39 )
+anims/ShootLeft = SubResource( 40 )
+anims/ShootRight = SubResource( 41 )
+anims/ShootUpLeft = SubResource( 42 )
+anims/ShootUpRight = SubResource( 43 )
+anims/SlideLeft = SubResource( 44 )
+anims/SlideRight = SubResource( 45 )
+anims/StabLeft = SubResource( 46 )
+anims/StabRight = SubResource( 47 )
 
 [node name="Tween" type="Tween" parent="."]
 
@@ -553,7 +603,7 @@ editor_draw_drag_margin = true
 
 [node name="MovementCollision" type="CollisionShape2D" parent="."]
 position = Vector2( -0.695272, -1.39242 )
-shape = SubResource( 42 )
+shape = SubResource( 48 )
 
 [node name="RifleBeam" parent="." instance=ExtResource( 1 )]
 position = Vector2( 0, -5.483 )
@@ -562,4 +612,4 @@ position = Vector2( 0, -5.483 )
 position = Vector2( 0, -6 )
 texture = ExtResource( 2 )
 hframes = 56
-frame = 6
+frame = 41

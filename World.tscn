@@ -20,9 +20,13 @@ position = Vector2( 260.74, 228.923 )
 process_mode = 0
 parameters/playback = SubResource( 1 )
 parameters/Roll/blend_position = 0.00343645
+parameters/Stab/blend_position = 0
 
 [node name="AnimationPlayer" parent="Level/Player" index="1"]
 method_call_mode = 1
+
+[node name="Body" parent="Level/Player" index="6"]
+frame = 6
 
 [node name="Label" type="Label" parent="Level/Player"]
 margin_left = -27.9873

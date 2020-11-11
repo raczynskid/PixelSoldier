@@ -7,6 +7,7 @@ var current_state = null
 var fire : float
 var roll : float
 var slide : float
+var stab : float
 var force_reload : float
 var reload : bool
 var roll_enabled = true
@@ -55,6 +56,8 @@ func _physics_process(delta):
 		velocity = roll_state(velocity)
 	elif current_state == "slide":
 		velocity = slide_state(velocity)
+	elif current_state == "stab":
+		velocity = stab_state(velocity)
 	else:
 		# if no action state is applied
 		# but movement controls are pressed
@@ -104,6 +107,11 @@ func get_movement_inputs():
 	return input_vector
 
 func get_action_inputs(delta):
+	# listen for any non-movement input
+	# or contextual states
+	# perform actions on entry to state
+	# actual state actions called from physics_process
+
 	# tick cooldowns
 	roll_cooldown.tick(delta)
 	beam_cooldown.tick(delta)
@@ -113,6 +121,7 @@ func get_action_inputs(delta):
 	roll = Input.get_action_strength("ui_down")
 	slide = Input.get_action_strength("slide")
 	force_reload = Input.is_action_just_pressed("reload")
+	stab = Input.is_action_just_pressed("stab") or current_state in ["stab"]
 
 	# force reload state on input
 	if force_reload:
@@ -121,6 +130,12 @@ func get_action_inputs(delta):
 	# check for contextual states
 	reload = (ammo <= 0)
 	
+	if stab:
+		animationTree.set("parameters/Stab/blend_position", last_vector.x)
+		animationState.travel('Stab')
+		input_vector.x = 0
+		return "stab"
+
 	if reload:
 		# if player is currently reloading, set animation to idle
 		animationTree.set("parameters/Idle/blend_position", last_vector.x)
@@ -360,4 +375,15 @@ func reload_rifle(delta):
 			# if not tick timer down
 			reload_cooldown.tick(delta)
 		
+func stab_state(vector):
+	# vector : velocity
+	# return : Vector2
 
+	current_state = "stab"
+
+	# melee attack handling
+
+	return shed_speed(vector)
+
+func end_stab():
+	current_state = "idle"
