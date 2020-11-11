@@ -9,6 +9,7 @@ const BULLETSPEED = 900
 
 const PLAYER_SLIDE_FACTOR = 20
 const RIFLE_DMG = 1
+const MELEE_DMG = 30
 
 const UP = Vector2(0, -1)
 

@@ -25,6 +25,12 @@ func _on_hit_by_rifle(object):
 		if object == self:
 			hp -= Globals.RIFLE_DMG
 
+func hit_by_melee():
+	if not dead:
+		# check if instance being collided
+		# with is self
+		hp -= Globals.MELEE_DMG
+
 func _physics_process(_delta):
 	# only check for damage if not dead
 	if not dead:
