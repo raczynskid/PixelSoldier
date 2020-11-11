@@ -51,8 +51,6 @@ func _physics_process(delta):
 	# call methods based on state machine
 	if current_state == "shoot":
 		velocity = shoot(input_vector, delta)
-	elif current_state == "reload":
-		velocity = reload_rifle(input_vector, delta)
 	elif current_state == "roll":
 		velocity = roll_state(velocity)
 	elif current_state == "slide":
@@ -80,10 +78,13 @@ func _physics_process(delta):
 			else:
 				# idle
 				idle_state(last_vector)
+	
+	# check for reload context
+	reload_rifle(delta)
 
-		# check for jump input
-		if input_vector.y > 0:
-			velocity = jump(velocity)
+	# check for jump input
+	if input_vector.y > 0 and current_state in ["move", "reload"]:
+		velocity = jump(velocity)
 
 	# apply velocity to player
 	velocity = move_and_slide(velocity, Globals.UP)
@@ -118,17 +119,13 @@ func get_action_inputs(delta):
 		ammo = 0
 	
 	# check for contextual states
-	reload = (ammo <= 0) and (velocity.x == 0)
+	reload = (ammo <= 0)
 	
 	if reload:
 		# if player is currently reloading, set animation to idle
 		animationTree.set("parameters/Idle/blend_position", last_vector.x)
 		animationState.travel('Idle')
 		beam.get_node("End/Ricochet").emitting = false
-		return "reload"
-	elif (ammo <= 0) and (input_vector == Vector2.ZERO):
-		# if player moves when reloading reset timer
-		reload_cooldown.reset()
 
 	# if input pressed
 	if fire and ammo > 0:
@@ -338,36 +335,29 @@ func shoot(vector, _delta):
 	
 	return shed_speed(velocity)
 
-func reload_rifle(vector, delta):
-	# vector : input_vector
+func reload_rifle(delta):
+	# vector : velocity
 	# return : Vector2
 
 	# reload handling
-	# reloading only happens when stationary
 
-	# stay in reload state
-	current_state = "reload"
+	# reloading only happens if no ammo
+	if ammo <= 0:
 	
-	# check if reloaded
-	if reload_cooldown.is_ready():
+		# check if reloaded
+		if reload_cooldown.is_ready():
 
-		# reset ammo count
-		ammo = Globals.RIFLE_MAX_AMMO
+			# reset ammo count
+			ammo = Globals.RIFLE_MAX_AMMO
 
-		# reset timer
-		reload_cooldown.reset()
+			# reset timer
+			reload_cooldown.reset()
 
-		# exit reload state
-		current_state = "idle"
+			# exit reload state
+			current_state = "idle"
 
-	else: 
-		# if not tick timer down
-		reload_cooldown.tick(delta)
-	
-	# allow movement to break state
-	if input_vector != Vector2.ZERO:
-		velocity = movement_state(vector)
-
-	return velocity
+		else: 
+			# if not tick timer down
+			reload_cooldown.tick(delta)
 		
 
