@@ -92,7 +92,7 @@ func _physics_process(delta):
 	reload_rifle(delta)
 
 	# check for jump input
-	if input_vector.y > 0 and current_state in ["move", "reload"]:
+	if input_vector.y > 0 and current_state in ["move", "reload", "idle", null]:
 		velocity = jump(velocity)
 
 	# apply velocity to player
