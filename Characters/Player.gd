@@ -30,6 +30,9 @@ onready var animationPlayer = get_node("AnimationPlayer")
 onready var animationTree = get_node("AnimationTree")
 onready var animationState = animationTree.get("parameters/playback")
 
+# load UI elements
+onready var ammo_bar = get_node("UI/Interface/Bar/TextureProgress")
+
 # load misc nodes
 onready var beam = get_node("RifleBeam")
 
@@ -40,6 +43,9 @@ func _ready():
 	reload_cooldown.reset()
 
 func _physics_process(delta):
+
+	# update UI
+	ammo_bar.value = ammo
 
 	# apply gravity to player
 	velocity = gravity_modifiers(delta, velocity)

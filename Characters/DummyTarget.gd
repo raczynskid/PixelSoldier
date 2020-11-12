@@ -26,9 +26,12 @@ func _on_hit_by_rifle(object):
 			hp -= Globals.RIFLE_DMG
 
 func hit_by_melee():
+# called from Player/ActionPivot/knife_hurtbox signal
+# interface method static name
+
+	# check for damage only if not dead
 	if not dead:
-		# check if instance being collided
-		# with is self
+		# decrease hp by global melee dmg
 		hp -= Globals.MELEE_DMG
 
 func _physics_process(_delta):

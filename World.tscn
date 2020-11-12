@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Environments/Tiles.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Characters/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Characters/DummyTarget.tscn" type="PackedScene" id=3]
+[ext_resource path="res://UI/Control.tscn" type="PackedScene" id=4]
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=1]
 
@@ -24,9 +25,6 @@ parameters/Stab/blend_position = 0
 
 [node name="AnimationPlayer" parent="Level/Player" index="1"]
 method_call_mode = 1
-
-[node name="Body" parent="Level/Player" index="6"]
-frame = 6
 
 [node name="Label" type="Label" parent="Level/Player"]
 margin_left = -27.9873
@@ -99,6 +97,8 @@ position = Vector2( 741.016, 537.635 )
 
 [node name="KinematicBody2D7" parent="Level" instance=ExtResource( 3 )]
 position = Vector2( 440.393, 266.412 )
+
+[node name="Interface" parent="." instance=ExtResource( 4 )]
 
 [editable path="Level/Player"]
 
