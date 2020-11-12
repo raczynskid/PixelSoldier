@@ -1,8 +1,10 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://UI/src/ammobar_background.png" type="Texture" id=1]
 [ext_resource path="res://UI/src/ammobar_foreground.png" type="Texture" id=2]
 [ext_resource path="res://UI/AmmoBarTint.gd" type="Script" id=3]
+[ext_resource path="res://UI/src/healthbar_background.png" type="Texture" id=4]
+[ext_resource path="res://UI/src/healthbar_foreground.png" type="Texture" id=5]
 
 [node name="Interface" type="Control"]
 margin_right = 7.0
@@ -11,12 +13,9 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Bar" type="VBoxContainer" parent="."]
+[node name="Bar" type="HBoxContainer" parent="."]
 margin_right = 7.0
 margin_bottom = 71.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="TextureProgress" type="TextureProgress" parent="Bar"]
 margin_right = 7.0
@@ -28,3 +27,12 @@ script = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="HP" type="TextureProgress" parent="Bar"]
+margin_left = 11.0
+margin_right = 48.0
+margin_bottom = 71.0
+value = 50.0
+texture_under = ExtResource( 4 )
+texture_progress = ExtResource( 5 )
+fill_mode = 3

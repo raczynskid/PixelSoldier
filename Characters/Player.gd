@@ -13,6 +13,7 @@ var reload : bool
 var roll_enabled = true
 var can_shoot = true
 var ammo = Globals.RIFLE_MAX_AMMO
+var hp = Globals.PLAYER_MAX_HP
 
 # load vectors
 var velocity = Vector2.ZERO
@@ -32,6 +33,7 @@ onready var animationState = animationTree.get("parameters/playback")
 
 # load UI elements
 onready var ammo_bar = get_node("UI/Interface/Bar/TextureProgress")
+onready var health_bar = get_node("UI/Interface/Bar/HP")
 
 # load misc nodes
 onready var beam = get_node("RifleBeam")
@@ -46,6 +48,7 @@ func _physics_process(delta):
 
 	# update UI
 	ammo_bar.value = ammo
+	health_bar.value = hp
 
 	# apply gravity to player
 	velocity = gravity_modifiers(delta, velocity)
@@ -393,3 +396,6 @@ func stab_state(vector):
 
 func end_stab():
 	current_state = "idle"
+
+func take_damage(dmg):
+	hp -= dmg

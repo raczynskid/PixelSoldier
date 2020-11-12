@@ -1,7 +1,7 @@
 extends Area2D
 onready var hit_object = null
 
-# called from hurtbox area area entered signal
+# called when hurtbox area entered signal
 func _on_knife_hurtbox_area_entered(body):
 	# body : Area2D
 	# get parent of the hitbox
