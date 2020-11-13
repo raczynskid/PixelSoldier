@@ -20,11 +20,15 @@ position = Vector2( 493.852, 503.035 )
 [node name="AnimationTree" parent="Level/Player" index="0"]
 process_mode = 0
 parameters/playback = SubResource( 1 )
+parameters/Die/blend_position = 0
 parameters/Roll/blend_position = 0.00343645
 parameters/Stab/blend_position = 0
 
 [node name="AnimationPlayer" parent="Level/Player" index="1"]
 method_call_mode = 1
+
+[node name="Body" parent="Level/Player" index="6"]
+frame = 6
 
 [node name="UI" parent="Level/Player" index="8"]
 scale = Vector2( 2, 2 )
@@ -88,7 +92,7 @@ position = Vector2( 434.557, 538.01 )
 position = Vector2( 259.481, 346.247 )
 
 [node name="KinematicBody2D2" parent="Level" instance=ExtResource( 3 )]
-position = Vector2( 493.366, 537.635 )
+position = Vector2( 297.444, 506.121 )
 
 [node name="KinematicBody2D4" parent="Level" instance=ExtResource( 3 )]
 position = Vector2( 122.554, 345.872 )

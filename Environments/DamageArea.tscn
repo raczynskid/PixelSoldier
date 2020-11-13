@@ -17,5 +17,6 @@ shape = SubResource( 1 )
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 1.47159, -0.210233 )
 scale = Vector2( 2.30733, 1.24307 )
+z_index = -4
 texture = ExtResource( 1 )
 [connection signal="body_entered" from="DamageArea" to="DamageArea" method="_on_DamageArea_body_entered"]

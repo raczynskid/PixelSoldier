@@ -12,6 +12,7 @@ var force_reload : float
 var reload : bool
 var roll_enabled = true
 var can_shoot = true
+var dead : bool = false
 var ammo = Globals.RIFLE_MAX_AMMO
 var hp = Globals.PLAYER_MAX_HP
 
@@ -25,6 +26,7 @@ var air_acceleration = float(Globals.ACCELERATION) / 12
 onready var roll_cooldown = Cooldown.new(3)
 onready var beam_cooldown = Cooldown.new(0.1)
 onready var reload_cooldown = Cooldown.new(2)
+onready var knockdown_duration = Cooldown.new(0.5)
 
 # load animation nodes
 onready var animationPlayer = get_node("AnimationPlayer")
@@ -43,6 +45,7 @@ func _ready():
 	velocity = Vector2(0,0)
 	roll_cooldown.max_time = 0.3
 	reload_cooldown.reset()
+	knockdown_duration.reset()
 
 func _physics_process(delta):
 
@@ -67,6 +70,8 @@ func _physics_process(delta):
 		velocity = slide_state(velocity)
 	elif current_state == "stab":
 		velocity = stab_state(velocity)
+	elif current_state == "dead":
+		knockback(50, delta)
 	else:
 		# if no action state is applied
 		# but movement controls are pressed
@@ -138,6 +143,11 @@ func get_action_inputs(delta):
 	
 	# check for contextual states
 	reload = (ammo <= 0)
+
+	if (hp <= 0):
+		if not dead:
+			dead = die(last_vector)
+		return "dead"
 	
 	if stab:
 		animationTree.set("parameters/Stab/blend_position", last_vector.x)
@@ -397,5 +407,28 @@ func stab_state(vector):
 func end_stab():
 	current_state = "idle"
 
-func take_damage(dmg):
-	hp -= dmg
+func die(vector):
+	# vector : last_vector
+	# return : None
+
+	# play death animation based on last vector
+	animationTree.set("parameters/Die/blend_position", vector.x)
+	animationState.travel('Die')
+
+	# return true to switch to dead state
+	return true
+
+func knockback(power, delta):
+	# knockback function
+	# power : int
+
+	if knockdown_duration.is_ready():
+		# if duration of knockdown is finished,
+		# return no velocity
+
+		velocity = move_and_slide(Vector2.ZERO)
+	else:
+		# during knockback, apply linear velocity based
+		# on last vector
+		velocity = move_and_slide(Vector2(last_vector.x * -power, -1), Globals.UP)
+		knockdown_duration.tick(delta)
