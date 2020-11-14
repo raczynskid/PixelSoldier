@@ -27,6 +27,7 @@ onready var roll_cooldown = Cooldown.new(3)
 onready var beam_cooldown = Cooldown.new(0.1)
 onready var reload_cooldown = Cooldown.new(2)
 onready var knockdown_duration = Cooldown.new(0.5)
+onready var back_to_menu = Cooldown.new(1)
 
 # load animation nodes
 onready var animationPlayer = get_node("AnimationPlayer")
@@ -46,6 +47,7 @@ func _ready():
 	roll_cooldown.max_time = 0.3
 	reload_cooldown.reset()
 	knockdown_duration.reset()
+	back_to_menu.reset()
 
 func _physics_process(delta):
 
@@ -427,6 +429,12 @@ func knockback(power, delta):
 		# return no velocity
 
 		velocity = move_and_slide(Vector2.ZERO)
+
+		if back_to_menu.is_ready():
+			get_tree().change_scene("res://UI/TitleScreen.tscn")
+		else:
+			back_to_menu.tick(delta)
+
 	else:
 		# during knockback, apply linear velocity based
 		# on last vector
