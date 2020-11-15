@@ -125,13 +125,15 @@ func seek_player():
 	if playerDetectionZone.can_see_player():
 		current_state = "chase"
 
-func pick_animation(velocity):
-	if velocity.x == 0:
-		animationTree.set("parameters/Idle/blend_position", last_vector.x)
+func pick_animation(vector):
+	# vector : velocity
+	# return : none
+	if vector.x == 0:
+		animationTree.set("parameters/Idle/blend_position", vector.x)
 		animationState.travel("Idle")
-	elif (abs(velocity.x) > 0) and (abs(velocity.x) < 50):
-		animationTree.set("parameters/Walk/blend_position", last_vector.x)
+	elif (abs(vector.x) > 0) and (abs(vector.x) < 50):
+		animationTree.set("parameters/Walk/blend_position", vector.x)
 		animationState.travel("Walk")
-	elif (abs(velocity.x) > 50):
-		animationTree.set("parameters/Run/blend_position", last_vector.x)
+	elif (abs(vector.x) > 50):
+		animationTree.set("parameters/Run/blend_position", vector.x)
 		animationState.travel("Run")

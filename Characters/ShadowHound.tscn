@@ -278,7 +278,7 @@ start_node = "Idle"
 [sub_resource type="AnimationNodeStateMachinePlayback" id=39]
 
 [sub_resource type="CircleShape2D" id=40]
-radius = 53.3651
+radius = 89.188
 
 [node name="ShadowHound" type="KinematicBody2D" groups=[
 "enemies",
