@@ -56,7 +56,8 @@ func _physics_process(delta):
 			else:
 				# if player exited detection zone, stop
 				velocity = Vector2.ZERO
-
+		
+		pick_animation(velocity)
 		velocity = gravity_modifiers(delta, velocity)
 
 		# if half damaged change texture to damaged
@@ -74,17 +75,24 @@ func _physics_process(delta):
 	# debug nodes
 	if not dead:
 		get_node("HPLabel").text = "HP: " + var2str(hp)
+		get_node("Label").text = var2str(velocity)
 	else:
 		get_node("HPLabel").text = "dead AF"
 
 func die():
-	# set dead state, disable collisions
+	# set dead state
 	dead = true
-	#get_node("Sprite").set_texture(spr_dead)
+
+	# disable collisions
 	get_node("Hurtbox/CollisionShape2D").disabled = true
+
+	# play death animation
 	animationTree.set("parameters/Die/blend_position", last_vector.x)
 	animationState.travel("Die")
+
+	# disable physics collisions
 	get_node("CollisionShape2D").disabled = true
+	velocity = Vector2.ZERO
 
 func gravity_modifiers(delta, vector):
 	# vector : velocity
@@ -116,3 +124,14 @@ func seek_player():
 	# use detection zone to check if player in range
 	if playerDetectionZone.can_see_player():
 		current_state = "chase"
+
+func pick_animation(velocity):
+	if velocity.x == 0:
+		animationTree.set("parameters/Idle/blend_position", last_vector.x)
+		animationState.travel("Idle")
+	elif (abs(velocity.x) > 0) and (abs(velocity.x) < 50):
+		animationTree.set("parameters/Walk/blend_position", last_vector.x)
+		animationState.travel("Walk")
+	elif (abs(velocity.x) > 50):
+		animationTree.set("parameters/Run/blend_position", last_vector.x)
+		animationState.travel("Run")

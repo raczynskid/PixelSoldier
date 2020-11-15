@@ -348,4 +348,14 @@ modulate = Color( 1, 1, 1, 0.454902 )
 [node name="CollisionShape2D" parent="PlayerDetectionZone" index="0"]
 shape = SubResource( 40 )
 
+[node name="Label" type="Label" parent="."]
+visible = false
+margin_left = -38.0
+margin_top = -18.0
+margin_right = -11.0
+margin_bottom = -4.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [editable path="PlayerDetectionZone"]
