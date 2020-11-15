@@ -9,6 +9,7 @@ const BULLETSPEED = 900
 
 const PLAYER_SLIDE_FACTOR = 20
 const PLAYER_MAX_HP = 100
+const SHADOWHOUND_MAX_HP = 50
 const RIFLE_DMG = 1
 const MELEE_DMG = 30
 

@@ -109,9 +109,7 @@ func _physics_process(delta):
 	velocity = move_and_slide(velocity, Globals.UP)
 
 	# debug labels
-	get_node("Label").text = "ammo " + var2str(ammo)
-	get_node("Label2").text = "reload in" + var2str(stepify(reload_cooldown.time, 0.01))
-	get_node("Label3").text = var2str(current_state)
+
 	
 
 func get_movement_inputs():
