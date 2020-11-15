@@ -27,9 +27,6 @@ parameters/Stab/blend_position = 0
 [node name="AnimationPlayer" parent="Level/Player" index="1"]
 method_call_mode = 1
 
-[node name="Body" parent="Level/Player" index="6"]
-frame = 6
-
 [node name="UI" parent="Level/Player" index="8"]
 scale = Vector2( 2, 2 )
 transform = Transform2D( 2, 0, 0, 2, 0, 0 )

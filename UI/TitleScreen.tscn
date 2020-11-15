@@ -51,10 +51,8 @@ alignment = 1
 [node name="NewGameButton" parent="Menu/CenterRow/Buttons" instance=ExtResource( 2 )]
 margin_top = 26.0
 margin_bottom = 86.0
-rect_min_size = Vector2( 360, 60 )
 
 [node name="ExitButton" parent="Menu/CenterRow/Buttons" instance=ExtResource( 3 )]
 margin_top = 90.0
 margin_bottom = 150.0
-rect_min_size = Vector2( 360, 60 )
 script = null
