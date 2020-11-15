@@ -15,6 +15,7 @@ var current_state = null
 onready var player = get_parent().get_node("Player")
 onready var rifle_beam = player.get_node("RifleBeam")
 onready var active_sprite = get_node("Sprite")
+onready var playerDetectionZone = get_node("PlayerDetectionZone")
 
 # load animation nodes
 onready var animationPlayer = get_node("FullHPAnimationPlayer")
@@ -36,6 +37,26 @@ func _physics_process(delta):
 		# apply gravity to kinematic body
 		# only when not dead - workaround because same
 		# collision shape used for physics and combat
+		if current_state == null:
+
+			# check for player entering
+			# detection zone if in idle state
+
+			seek_player()
+		elif current_state == "chase":
+			# if player found
+
+			var target_player = playerDetectionZone.player
+			if target_player != null:
+				# if player is found
+				# establish vector between self and player position
+				var direction = (player.global_position - global_position).normalized()
+				# move towards player
+				velocity = velocity.move_toward(direction * Globals.SHADOWHOUND_MAX_SPEED, Globals.ACCELERATION * delta)
+			else:
+				# if player exited detection zone, stop
+				velocity = Vector2.ZERO
+
 		velocity = gravity_modifiers(delta, velocity)
 
 		# if half damaged change texture to damaged
@@ -90,3 +111,8 @@ func hit_by_melee():
 	if not dead:
 		# decrease hp by global melee dmg
 		hp -= Globals.MELEE_DMG
+
+func seek_player():
+	# use detection zone to check if player in range
+	if playerDetectionZone.can_see_player():
+		current_state = "chase"
