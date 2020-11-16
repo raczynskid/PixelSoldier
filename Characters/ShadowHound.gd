@@ -16,6 +16,7 @@ onready var player = get_parent().get_node("Player")
 onready var rifle_beam = player.get_node("RifleBeam")
 onready var active_sprite = get_node("Sprite")
 onready var playerDetectionZone = get_node("PlayerDetectionZone")
+onready var meleeRaycast = get_node("MeleeRaycast")
 
 # load animation nodes
 onready var animationPlayer = get_node("FullHPAnimationPlayer")
@@ -56,8 +57,15 @@ func _physics_process(delta):
 			else:
 				# if player exited detection zone, stop
 				velocity = Vector2.ZERO
-		
+				
 		pick_animation(velocity)
+
+		if meleeRaycast.is_colliding():
+			print("raycolliding")
+			# play attack animation
+			animationTree.set("parameters/Attack/blend_position", velocity.x)
+			animationState.travel("Attack")
+
 		velocity = gravity_modifiers(delta, velocity)
 
 		# if half damaged change texture to damaged

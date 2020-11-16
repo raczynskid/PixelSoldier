@@ -315,7 +315,7 @@ __meta__ = {
 texture = ExtResource( 2 )
 vframes = 3
 hframes = 36
-frame = 13
+frame = 12
 
 [node name="FullHPAnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "IdleLeft"
@@ -336,7 +336,7 @@ tree_root = SubResource( 38 )
 anim_player = NodePath("../FullHPAnimationPlayer")
 active = true
 parameters/playback = SubResource( 39 )
-parameters/Attack/blend_position = 0
+parameters/Attack/blend_position = 0.00072515
 parameters/Die/blend_position = 0
 parameters/Idle/blend_position = 0.0
 parameters/Run/blend_position = 0
@@ -357,5 +357,9 @@ margin_bottom = -4.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="MeleeRaycast" type="RayCast2D" parent="."]
+enabled = true
+cast_to = Vector2( 30, 0 )
 
 [editable path="PlayerDetectionZone"]
