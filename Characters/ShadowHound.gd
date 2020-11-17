@@ -10,6 +10,8 @@ var hp : int = max_hp
 var dead : bool = false
 const Cooldown = preload('res://Scripts/Cooldown.gd')
 var current_state = null
+var melee_collider = null
+var collision_body = null
 
 # load nodes
 onready var player = get_parent().get_node("Player")
@@ -35,6 +37,9 @@ func _physics_process(delta):
 	# only check for damage if not dead
 	if not dead:
 
+		# rotate melee attack raycast
+		rotate_raycast(last_vector)
+
 		# apply gravity to kinematic body
 		# only when not dead - workaround because same
 		# collision shape used for physics and combat
@@ -57,14 +62,15 @@ func _physics_process(delta):
 			else:
 				# if player exited detection zone, stop
 				velocity = Vector2.ZERO
-				
-		pick_animation(velocity)
-
+		
+		if not current_state in ["attack"]:
+			pick_animation(velocity)
+		
+		# if short horizontal detection raycast finds collision
 		if meleeRaycast.is_colliding():
-			print("raycolliding")
-			# play attack animation
-			animationTree.set("parameters/Attack/blend_position", velocity.x)
-			animationState.travel("Attack")
+			# check if there is no attack in progress
+			if not current_state in ["attack"]:
+				attack_state()
 
 		velocity = gravity_modifiers(delta, velocity)
 
@@ -80,9 +86,12 @@ func _physics_process(delta):
 	# apply velocity to kinematicbody2D
 	velocity = move_and_slide(velocity, Globals.UP)
 
+	if velocity != Vector2.ZERO:
+		last_vector = velocity
+
 	# debug nodes
 	if not dead:
-		get_node("HPLabel").text = "HP: " + var2str(hp)
+		get_node("HPLabel").text = "state: " + var2str(current_state)
 		get_node("Label").text = var2str(velocity)
 	else:
 		get_node("HPLabel").text = "dead AF"
@@ -145,3 +154,41 @@ func pick_animation(vector):
 	elif (abs(vector.x) > 50):
 		animationTree.set("parameters/Run/blend_position", vector.x)
 		animationState.travel("Run")
+
+func attack_state():
+	# attack to the front
+	current_state = "attack"
+	# play attack animation
+	animationTree.set("parameters/Attack/blend_position", last_vector.x)
+	animationState.travel("Attack")
+
+func attack_end():
+	# method call from animation player
+	# BiteLeft and BiteRight
+
+	# get the body/area (hurtbox) colliding
+	# with the melee raycast
+	melee_collider = meleeRaycast.get_collider()
+
+	# check if anything colliding
+	# with the melee horizontal raycast
+	if melee_collider != null:
+
+		# get parent node of hurtbox
+		collision_body = melee_collider.get_parent()
+
+		# if hurtbox belongs to player,
+		# decrease player hp
+		if collision_body.is_in_group("player"):
+			collision_body.hp -= 10
+		
+	# reset enemy state
+	current_state = null
+
+func rotate_raycast(vector):
+	# turn attack raycast to face
+	# last direction of hound
+	if vector.x > 0:
+		meleeRaycast.cast_to = Vector2(10, 0)
+	else:
+		meleeRaycast.cast_to = Vector2(-10, 0)
