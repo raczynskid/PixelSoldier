@@ -49,6 +49,7 @@ func _physics_process(delta):
 			# detection zone if in idle state
 
 			seek_player()
+			
 		elif current_state == "chase":
 			# if player found
 
@@ -156,11 +157,19 @@ func pick_animation(vector):
 		animationState.travel("Run")
 
 func attack_state():
-	# attack to the front
-	current_state = "attack"
-	# play attack animation
-	animationTree.set("parameters/Attack/blend_position", last_vector.x)
-	animationState.travel("Attack")
+
+	# check which body is being collided with
+	melee_collider = meleeRaycast.get_collider()
+	collision_body = melee_collider.get_parent()
+
+	# only engage when player 
+	if collision_body.name == "Player":
+
+		# attack to the front
+		current_state = "attack"
+		# play attack animation
+		animationTree.set("parameters/Attack/blend_position", last_vector.x)
+		animationState.travel("Attack")
 
 func attack_end():
 	# method call from animation player
