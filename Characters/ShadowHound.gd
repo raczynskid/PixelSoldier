@@ -22,11 +22,12 @@ onready var meleeRaycast = get_node("MeleeRaycast")
 
 # load animation nodes
 onready var animationPlayer = get_node("FullHPAnimationPlayer")
+onready var ldmg_animationPlayer = get_node("LightDmgAnimationPlayer")
 onready var animationTree = get_node("AnimationTree")
 onready var animationState = animationTree.get("parameters/playback")
 
 func _ready():
-	
+
 	rifle_beam.connect("_on_hit_by_rifle", self, "_on_hit_by_rifle")
 	animationTree.active = true
 	animationTree.set("parameters/Idle/blend_position", last_vector.x)
@@ -39,6 +40,10 @@ func _physics_process(delta):
 
 		# rotate melee attack raycast
 		rotate_raycast(last_vector)
+
+		# switch animation player to show
+		# damage overlay
+		switch_animation_dmg_overlay()
 
 		# apply gravity to kinematic body
 		# only when not dead - workaround because same
@@ -92,10 +97,14 @@ func _physics_process(delta):
 
 	# debug nodes
 	if not dead:
-		get_node("HPLabel").text = "state: " + var2str(current_state)
-		get_node("Label").text = var2str(velocity)
+		get_node("HPLabel").text = "hp: " + var2str(hp)
 	else:
 		get_node("HPLabel").text = "dead AF"
+
+func switch_animation_dmg_overlay():
+	if (animationTree.anim_player != "../LightDmgAnimationPlayer") and (hp < (Globals.SHADOWHOUND_MAX_HP * 0.5)):
+		animationTree.anim_player = "../LightDmgAnimationPlayer"
+	
 
 func die():
 	# set dead state
