@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/6-Dark Fantasy Studio- Whispers (seamless).wav-030a71c0ef9b977afea20778f6c91f15.sample"
+
+[deps]
+
+source_file="res://Sounds/Music/6-Dark Fantasy Studio- Whispers (seamless).wav"
+dest_files=[ "res://.import/6-Dark Fantasy Studio- Whispers (seamless).wav-030a71c0ef9b977afea20778f6c91f15.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

@@ -216,7 +216,7 @@ tracks/0/keys = {
 "values": [ 6, 7 ]
 }
 
-[sub_resource type="Animation" id=51]
+[sub_resource type="Animation" id=16]
 resource_name = "BiteLeft"
 length = 0.6
 loop = true
@@ -247,7 +247,7 @@ tracks/1/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=52]
+[sub_resource type="Animation" id=17]
 resource_name = "BiteRight"
 length = 0.6
 loop = true
@@ -278,7 +278,7 @@ tracks/1/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=53]
+[sub_resource type="Animation" id=18]
 resource_name = "DieLeft"
 length = 0.7
 tracks/0/type = "value"
@@ -294,7 +294,7 @@ tracks/0/keys = {
 "values": [ 96, 97, 98, 99, 100, 101 ]
 }
 
-[sub_resource type="Animation" id=54]
+[sub_resource type="Animation" id=19]
 resource_name = "DieRight"
 length = 0.7
 tracks/0/type = "value"
@@ -310,7 +310,7 @@ tracks/0/keys = {
 "values": [ 102, 103, 104, 105, 106, 107 ]
 }
 
-[sub_resource type="Animation" id=55]
+[sub_resource type="Animation" id=20]
 length = 0.2
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -325,7 +325,7 @@ tracks/0/keys = {
 "values": [ 48 ]
 }
 
-[sub_resource type="Animation" id=56]
+[sub_resource type="Animation" id=21]
 length = 0.2
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -340,7 +340,7 @@ tracks/0/keys = {
 "values": [ 49 ]
 }
 
-[sub_resource type="Animation" id=57]
+[sub_resource type="Animation" id=22]
 length = 0.5
 loop = true
 tracks/0/type = "value"
@@ -356,7 +356,7 @@ tracks/0/keys = {
 "values": [ 38, 39, 40, 41 ]
 }
 
-[sub_resource type="Animation" id=58]
+[sub_resource type="Animation" id=23]
 length = 0.5
 loop = true
 tracks/0/type = "value"
@@ -372,7 +372,7 @@ tracks/0/keys = {
 "values": [ 44, 45, 46, 47 ]
 }
 
-[sub_resource type="Animation" id=59]
+[sub_resource type="Animation" id=24]
 length = 0.3
 loop = true
 tracks/0/type = "value"
@@ -388,7 +388,7 @@ tracks/0/keys = {
 "values": [ 36, 37 ]
 }
 
-[sub_resource type="Animation" id=60]
+[sub_resource type="Animation" id=25]
 length = 0.3
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -403,7 +403,7 @@ tracks/0/keys = {
 "values": [ 42, 43 ]
 }
 
-[sub_resource type="Animation" id=61]
+[sub_resource type="Animation" id=26]
 resource_name = "BiteLeft"
 length = 0.6
 loop = true
@@ -434,7 +434,7 @@ tracks/1/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=62]
+[sub_resource type="Animation" id=27]
 resource_name = "BiteRight"
 length = 0.6
 loop = true
@@ -465,7 +465,7 @@ tracks/1/keys = {
 } ]
 }
 
-[sub_resource type="Animation" id=63]
+[sub_resource type="Animation" id=28]
 resource_name = "DieLeft"
 length = 0.7
 tracks/0/type = "value"
@@ -481,7 +481,7 @@ tracks/0/keys = {
 "values": [ 96, 97, 98, 99, 100, 101 ]
 }
 
-[sub_resource type="Animation" id=64]
+[sub_resource type="Animation" id=29]
 resource_name = "DieRight"
 length = 0.7
 tracks/0/type = "value"
@@ -497,7 +497,7 @@ tracks/0/keys = {
 "values": [ 102, 103, 104, 105, 106, 107 ]
 }
 
-[sub_resource type="Animation" id=65]
+[sub_resource type="Animation" id=30]
 length = 0.2
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -512,7 +512,7 @@ tracks/0/keys = {
 "values": [ 84 ]
 }
 
-[sub_resource type="Animation" id=66]
+[sub_resource type="Animation" id=31]
 length = 0.2
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -527,7 +527,7 @@ tracks/0/keys = {
 "values": [ 85 ]
 }
 
-[sub_resource type="Animation" id=67]
+[sub_resource type="Animation" id=32]
 length = 0.5
 loop = true
 tracks/0/type = "value"
@@ -543,7 +543,7 @@ tracks/0/keys = {
 "values": [ 74, 75, 76, 77 ]
 }
 
-[sub_resource type="Animation" id=68]
+[sub_resource type="Animation" id=33]
 length = 0.5
 loop = true
 tracks/0/type = "value"
@@ -559,7 +559,7 @@ tracks/0/keys = {
 "values": [ 80, 81, 82, 83 ]
 }
 
-[sub_resource type="Animation" id=69]
+[sub_resource type="Animation" id=34]
 length = 0.3
 loop = true
 tracks/0/type = "value"
@@ -575,7 +575,7 @@ tracks/0/keys = {
 "values": [ 72, 73 ]
 }
 
-[sub_resource type="Animation" id=70]
+[sub_resource type="Animation" id=35]
 length = 0.3
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
@@ -590,104 +590,105 @@ tracks/0/keys = {
 "values": [ 78, 79 ]
 }
 
-[sub_resource type="AnimationNodeAnimation" id=26]
+[sub_resource type="AnimationNodeAnimation" id=36]
 animation = "BiteLeft"
 
-[sub_resource type="AnimationNodeAnimation" id=27]
+[sub_resource type="AnimationNodeAnimation" id=37]
 animation = "BiteRight"
 
-[sub_resource type="AnimationNodeBlendSpace1D" id=28]
-blend_point_0/node = SubResource( 26 )
+[sub_resource type="AnimationNodeBlendSpace1D" id=38]
+blend_point_0/node = SubResource( 36 )
 blend_point_0/pos = -0.6
-blend_point_1/node = SubResource( 27 )
+blend_point_1/node = SubResource( 37 )
 blend_point_1/pos = 0.5
-
-[sub_resource type="AnimationNodeAnimation" id=29]
-animation = "DieLeft"
-
-[sub_resource type="AnimationNodeAnimation" id=30]
-animation = "DieRight"
-
-[sub_resource type="AnimationNodeBlendSpace1D" id=31]
-blend_point_0/node = SubResource( 29 )
-blend_point_0/pos = -0.5
-blend_point_1/node = SubResource( 30 )
-blend_point_1/pos = 0.5
-
-[sub_resource type="AnimationNodeAnimation" id=32]
-animation = "IdleLeft"
-
-[sub_resource type="AnimationNodeAnimation" id=33]
-animation = "IdleRight"
-
-[sub_resource type="AnimationNodeBlendSpace1D" id=34]
-blend_point_0/node = SubResource( 32 )
-blend_point_0/pos = -0.5
-blend_point_1/node = SubResource( 33 )
-blend_point_1/pos = 0.5
-
-[sub_resource type="AnimationNodeAnimation" id=35]
-animation = "RunRight"
-
-[sub_resource type="AnimationNodeAnimation" id=36]
-animation = "RunLeft"
-
-[sub_resource type="AnimationNodeBlendSpace1D" id=37]
-blend_point_0/node = SubResource( 35 )
-blend_point_0/pos = 0.5
-blend_point_1/node = SubResource( 36 )
-blend_point_1/pos = -0.5
-
-[sub_resource type="AnimationNodeAnimation" id=38]
-animation = "WalkLeft"
 
 [sub_resource type="AnimationNodeAnimation" id=39]
-animation = "WalkRight"
+animation = "DieLeft"
 
-[sub_resource type="AnimationNodeBlendSpace1D" id=40]
-blend_point_0/node = SubResource( 38 )
+[sub_resource type="AnimationNodeAnimation" id=40]
+animation = "DieRight"
+
+[sub_resource type="AnimationNodeBlendSpace1D" id=41]
+blend_point_0/node = SubResource( 39 )
 blend_point_0/pos = -0.5
-blend_point_1/node = SubResource( 39 )
+blend_point_1/node = SubResource( 40 )
 blend_point_1/pos = 0.5
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=41]
+[sub_resource type="AnimationNodeAnimation" id=42]
+animation = "IdleLeft"
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=42]
+[sub_resource type="AnimationNodeAnimation" id=43]
+animation = "IdleRight"
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=43]
+[sub_resource type="AnimationNodeBlendSpace1D" id=44]
+blend_point_0/node = SubResource( 42 )
+blend_point_0/pos = -0.5
+blend_point_1/node = SubResource( 43 )
+blend_point_1/pos = 0.5
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=44]
+[sub_resource type="AnimationNodeAnimation" id=45]
+animation = "RunRight"
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=45]
+[sub_resource type="AnimationNodeAnimation" id=46]
+animation = "RunLeft"
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=46]
+[sub_resource type="AnimationNodeBlendSpace1D" id=47]
+blend_point_0/node = SubResource( 45 )
+blend_point_0/pos = 0.5
+blend_point_1/node = SubResource( 46 )
+blend_point_1/pos = -0.5
+
+[sub_resource type="AnimationNodeAnimation" id=48]
+animation = "WalkLeft"
+
+[sub_resource type="AnimationNodeAnimation" id=49]
+animation = "WalkRight"
+
+[sub_resource type="AnimationNodeBlendSpace1D" id=50]
+blend_point_0/node = SubResource( 48 )
+blend_point_0/pos = -0.5
+blend_point_1/node = SubResource( 49 )
+blend_point_1/pos = 0.5
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=51]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=52]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=53]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=54]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=55]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=56]
 switch_mode = 2
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=47]
+[sub_resource type="AnimationNodeStateMachineTransition" id=57]
 
-[sub_resource type="AnimationNodeStateMachine" id=48]
-states/Attack/node = SubResource( 28 )
+[sub_resource type="AnimationNodeStateMachine" id=58]
+states/Attack/node = SubResource( 38 )
 states/Attack/position = Vector2( 906, 254 )
-states/Die/node = SubResource( 31 )
+states/Die/node = SubResource( 41 )
 states/Die/position = Vector2( 883, 100 )
-states/Idle/node = SubResource( 34 )
+states/Idle/node = SubResource( 44 )
 states/Idle/position = Vector2( 1136, 188 )
-states/Run/node = SubResource( 37 )
+states/Run/node = SubResource( 47 )
 states/Run/position = Vector2( 1607, 233 )
-states/Walk/node = SubResource( 40 )
+states/Walk/node = SubResource( 50 )
 states/Walk/position = Vector2( 1348, 233 )
-transitions = [ "Idle", "Walk", SubResource( 41 ), "Walk", "Idle", SubResource( 42 ), "Walk", "Run", SubResource( 43 ), "Run", "Walk", SubResource( 44 ), "Idle", "Die", SubResource( 45 ), "Attack", "Idle", SubResource( 46 ), "Idle", "Attack", SubResource( 47 ) ]
+transitions = [ "Idle", "Walk", SubResource( 51 ), "Walk", "Idle", SubResource( 52 ), "Walk", "Run", SubResource( 53 ), "Run", "Walk", SubResource( 54 ), "Idle", "Die", SubResource( 55 ), "Attack", "Idle", SubResource( 56 ), "Idle", "Attack", SubResource( 57 ) ]
 start_node = "Idle"
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id=49]
+[sub_resource type="AnimationNodeStateMachinePlayback" id=59]
 
-[sub_resource type="CircleShape2D" id=50]
+[sub_resource type="CircleShape2D" id=60]
 radius = 119.955
 
 [node name="ShadowHound" type="KinematicBody2D" groups=[
 "enemies",
 ]]
 z_index = -2
+collision_mask = 2
 script = ExtResource( 1 )
 
 [node name="Particles2D" type="Particles2D" parent="."]
@@ -720,7 +721,7 @@ __meta__ = {
 texture = ExtResource( 2 )
 vframes = 3
 hframes = 36
-frame = 102
+frame = 13
 
 [node name="FullHPAnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "IdleLeft"
@@ -739,36 +740,36 @@ anims/WalkRight = SubResource( 15 )
 [node name="LightDmgAnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "IdleLeft"
 playback_process_mode = 0
-anims/BiteLeft = SubResource( 51 )
-anims/BiteRight = SubResource( 52 )
-anims/DieLeft = SubResource( 53 )
-anims/DieRight = SubResource( 54 )
-anims/IdleLeft = SubResource( 55 )
-anims/IdleRight = SubResource( 56 )
-anims/RunLeft = SubResource( 57 )
-anims/RunRight = SubResource( 58 )
-anims/WalkLeft = SubResource( 59 )
-anims/WalkRight = SubResource( 60 )
+anims/BiteLeft = SubResource( 16 )
+anims/BiteRight = SubResource( 17 )
+anims/DieLeft = SubResource( 18 )
+anims/DieRight = SubResource( 19 )
+anims/IdleLeft = SubResource( 20 )
+anims/IdleRight = SubResource( 21 )
+anims/RunLeft = SubResource( 22 )
+anims/RunRight = SubResource( 23 )
+anims/WalkLeft = SubResource( 24 )
+anims/WalkRight = SubResource( 25 )
 
 [node name="HeavyDmgAnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "IdleLeft"
 playback_process_mode = 0
-anims/BiteLeft = SubResource( 61 )
-anims/BiteRight = SubResource( 62 )
-anims/DieLeft = SubResource( 63 )
-anims/DieRight = SubResource( 64 )
-anims/IdleLeft = SubResource( 65 )
-anims/IdleRight = SubResource( 66 )
-anims/RunLeft = SubResource( 67 )
-anims/RunRight = SubResource( 68 )
-anims/WalkLeft = SubResource( 69 )
-anims/WalkRight = SubResource( 70 )
+anims/BiteLeft = SubResource( 26 )
+anims/BiteRight = SubResource( 27 )
+anims/DieLeft = SubResource( 28 )
+anims/DieRight = SubResource( 29 )
+anims/IdleLeft = SubResource( 30 )
+anims/IdleRight = SubResource( 31 )
+anims/RunLeft = SubResource( 32 )
+anims/RunRight = SubResource( 33 )
+anims/WalkLeft = SubResource( 34 )
+anims/WalkRight = SubResource( 35 )
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
-tree_root = SubResource( 48 )
+tree_root = SubResource( 58 )
 anim_player = NodePath("../FullHPAnimationPlayer")
 active = true
-parameters/playback = SubResource( 49 )
+parameters/playback = SubResource( 59 )
 parameters/Attack/blend_position = 0.00072515
 parameters/Die/blend_position = 0
 parameters/Idle/blend_position = 0.0
@@ -779,7 +780,7 @@ parameters/Walk/blend_position = 0
 modulate = Color( 1, 1, 1, 0.454902 )
 
 [node name="CollisionShape2D" parent="PlayerDetectionZone" index="0"]
-shape = SubResource( 50 )
+shape = SubResource( 60 )
 
 [node name="Label" type="Label" parent="."]
 visible = false
