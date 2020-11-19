@@ -1,4 +1,4 @@
-[gd_scene load_steps=54 format=2]
+[gd_scene load_steps=64 format=2]
 
 [ext_resource path="res://Characters/ShadowHound.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/Characters/Enemies/zombiedog-Sheet.png" type="Texture" id=2]
@@ -403,6 +403,193 @@ tracks/0/keys = {
 "values": [ 42, 43 ]
 }
 
+[sub_resource type="Animation" id=61]
+resource_name = "BiteLeft"
+length = 0.6
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 86, 87, 88, 89, 90 ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.5 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "attack_end"
+} ]
+}
+
+[sub_resource type="Animation" id=62]
+resource_name = "BiteRight"
+length = 0.6
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 91, 92, 93, 94, 95 ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.5 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "attack_end"
+} ]
+}
+
+[sub_resource type="Animation" id=63]
+resource_name = "DieLeft"
+length = 0.7
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 96, 97, 98, 99, 100, 101 ]
+}
+
+[sub_resource type="Animation" id=64]
+resource_name = "DieRight"
+length = 0.7
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 102, 103, 104, 105, 106, 107 ]
+}
+
+[sub_resource type="Animation" id=65]
+length = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 84 ]
+}
+
+[sub_resource type="Animation" id=66]
+length = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 85 ]
+}
+
+[sub_resource type="Animation" id=67]
+length = 0.5
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 74, 75, 76, 77 ]
+}
+
+[sub_resource type="Animation" id=68]
+length = 0.5
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 80, 81, 82, 83 ]
+}
+
+[sub_resource type="Animation" id=69]
+length = 0.3
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 72, 73 ]
+}
+
+[sub_resource type="Animation" id=70]
+length = 0.3
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 78, 79 ]
+}
+
 [sub_resource type="AnimationNodeAnimation" id=26]
 animation = "BiteLeft"
 
@@ -495,7 +682,7 @@ start_node = "Idle"
 [sub_resource type="AnimationNodeStateMachinePlayback" id=49]
 
 [sub_resource type="CircleShape2D" id=50]
-radius = 89.188
+radius = 119.955
 
 [node name="ShadowHound" type="KinematicBody2D" groups=[
 "enemies",
@@ -533,7 +720,7 @@ __meta__ = {
 texture = ExtResource( 2 )
 vframes = 3
 hframes = 36
-frame = 13
+frame = 102
 
 [node name="FullHPAnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "IdleLeft"
@@ -563,6 +750,20 @@ anims/RunRight = SubResource( 58 )
 anims/WalkLeft = SubResource( 59 )
 anims/WalkRight = SubResource( 60 )
 
+[node name="HeavyDmgAnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "IdleLeft"
+playback_process_mode = 0
+anims/BiteLeft = SubResource( 61 )
+anims/BiteRight = SubResource( 62 )
+anims/DieLeft = SubResource( 63 )
+anims/DieRight = SubResource( 64 )
+anims/IdleLeft = SubResource( 65 )
+anims/IdleRight = SubResource( 66 )
+anims/RunLeft = SubResource( 67 )
+anims/RunRight = SubResource( 68 )
+anims/WalkLeft = SubResource( 69 )
+anims/WalkRight = SubResource( 70 )
+
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource( 48 )
 anim_player = NodePath("../FullHPAnimationPlayer")
@@ -581,6 +782,7 @@ modulate = Color( 1, 1, 1, 0.454902 )
 shape = SubResource( 50 )
 
 [node name="Label" type="Label" parent="."]
+visible = false
 margin_left = -38.0
 margin_top = -18.0
 margin_right = -11.0

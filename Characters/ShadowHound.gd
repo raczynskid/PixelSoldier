@@ -102,10 +102,11 @@ func _physics_process(delta):
 		get_node("HPLabel").text = "dead AF"
 
 func switch_animation_dmg_overlay():
-	if (animationTree.anim_player != "../LightDmgAnimationPlayer") and (hp < (Globals.SHADOWHOUND_MAX_HP * 0.5)):
+	if (animationTree.anim_player != "../LightDmgAnimationPlayer") and (hp < (Globals.SHADOWHOUND_MAX_HP * 0.70)):
 		animationTree.anim_player = "../LightDmgAnimationPlayer"
-	
-
+	if (animationTree.anim_player != "../HeavyDmgAnimationPlayer") and (hp < (Globals.SHADOWHOUND_MAX_HP * 0.30)):
+		animationTree.anim_player = "../HeavyDmgAnimationPlayer"
+		
 func die():
 	# set dead state
 	dead = true
