@@ -23,5 +23,4 @@ occluder = SubResource( 1 )
 
 [node name="Light2D" type="Light2D" parent="."]
 texture = ExtResource( 2 )
-color = Color( 0.611765, 0.615686, 0, 1 )
 shadow_enabled = true
