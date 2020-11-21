@@ -709,6 +709,7 @@ position = Vector2( 0.204395, 2.07141 )
 shape = SubResource( 5 )
 
 [node name="HPLabel" type="Label" parent="."]
+visible = false
 margin_left = -18.5174
 margin_top = -20.3735
 margin_right = 21.4826

@@ -56,6 +56,7 @@ node_b = NodePath("..")
 
 [node name="LampHeadSingle" parent="Base" instance=ExtResource( 3 )]
 position = Vector2( 0, 28.6542 )
+collision_layer = 2147483649
 
 [node name="PinJoint2D" parent="Base/LampHeadSingle" index="2"]
 node_a = NodePath("../../CableLink5")
