@@ -66,7 +66,11 @@ func _physics_process(_delta):
 					# emit signal if enemy was hit
 					emit_signal("_on_hit_by_rifle", current_collider) 
 			
-			# placeholder for destructible environment objects
+			# destructible environment objects
+			elif current_collider.is_in_group("destructibles"):
+				# emit signal if destructible was hit
+				emit_signal("_on_hit_by_rifle", current_collider) 
+			
 			else:
 				pass
 		

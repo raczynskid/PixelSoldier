@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Environments/Tiles.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Characters/Player.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Characters/DummyTarget.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Environments/DamageArea.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Characters/ShadowHound.tscn" type="PackedScene" id=5]
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=1]
 
@@ -82,6 +83,14 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="ShadowHound" parent="Level" instance=ExtResource( 5 )]
+position = Vector2( 250.033, 519.667 )
+z_index = 8
+
+[node name="ShadowHound2" parent="Level" instance=ExtResource( 5 )]
+position = Vector2( 227.785, 503.775 )
+z_index = 8
+
 [node name="KinematicBody2D" parent="Level" instance=ExtResource( 3 )]
 position = Vector2( 434.557, 538.01 )
 
@@ -89,7 +98,7 @@ position = Vector2( 434.557, 538.01 )
 position = Vector2( 259.481, 346.247 )
 
 [node name="KinematicBody2D2" parent="Level" instance=ExtResource( 3 )]
-position = Vector2( 297.444, 506.121 )
+position = Vector2( 425.326, 538.249 )
 
 [node name="KinematicBody2D4" parent="Level" instance=ExtResource( 3 )]
 position = Vector2( 122.554, 345.872 )

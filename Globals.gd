@@ -19,7 +19,11 @@ const RIFLE_MAX_AMMO = 100
 
 # enemy stats
 
-# SHADOWHOUND
+# == SHADOWHOUND
 
 const SHADOWHOUND_MAX_HP = 50
 const SHADOWHOUND_MAX_SPEED = 100
+
+# destructibles
+
+const CABLE_HP = 20

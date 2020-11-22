@@ -687,8 +687,7 @@ radius = 119.955
 [node name="ShadowHound" type="KinematicBody2D" groups=[
 "enemies",
 ]]
-z_index = -2
-collision_mask = 2
+z_index = 5
 script = ExtResource( 1 )
 
 [node name="Particles2D" type="Particles2D" parent="."]
@@ -698,18 +697,18 @@ preprocess = 5.0
 process_material = SubResource( 3 )
 
 [node name="Hurtbox" type="Area2D" parent="."]
+z_index = 10
+z_as_relative = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
 position = Vector2( 0.204395, 2.07141 )
 shape = SubResource( 4 )
-disabled = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0.204395, 2.07141 )
 shape = SubResource( 5 )
 
 [node name="HPLabel" type="Label" parent="."]
-visible = false
 margin_left = -18.5174
 margin_top = -20.3735
 margin_right = 21.4826
@@ -778,6 +777,7 @@ parameters/Run/blend_position = 0
 parameters/Walk/blend_position = 0
 
 [node name="PlayerDetectionZone" parent="." instance=ExtResource( 3 )]
+visible = false
 modulate = Color( 1, 1, 1, 0.454902 )
 
 [node name="CollisionShape2D" parent="PlayerDetectionZone" index="0"]

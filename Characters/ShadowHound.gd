@@ -146,7 +146,7 @@ func hit_by_melee():
 	# check for damage only if not dead
 	if not dead:
 		# decrease hp by global melee dmg
-		hp -= Globals.MELEE_DMG
+		self.hp -= Globals.MELEE_DMG
 
 func seek_player():
 	# use detection zone to check if player in range

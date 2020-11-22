@@ -4,15 +4,15 @@
 [ext_resource path="res://Weapons/RifleBeam.gd" type="Script" id=2]
 [ext_resource path="res://Sprites/Lights/light.png" type="Texture" id=3]
 
-[sub_resource type="OccluderPolygon2D" id=4]
+[sub_resource type="OccluderPolygon2D" id=1]
 
-[sub_resource type="Gradient" id=1]
+[sub_resource type="Gradient" id=2]
 colors = PoolColorArray( 1, 1, 1, 1, 0, 0, 0, 1 )
 
-[sub_resource type="GradientTexture" id=2]
-gradient = SubResource( 1 )
+[sub_resource type="GradientTexture" id=3]
+gradient = SubResource( 2 )
 
-[sub_resource type="ParticlesMaterial" id=3]
+[sub_resource type="ParticlesMaterial" id=4]
 flag_disable_z = true
 direction = Vector3( -1, 0, 0 )
 spread = 180.0
@@ -21,7 +21,7 @@ initial_velocity = 100.0
 initial_velocity_random = 0.67
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
-color_ramp = SubResource( 2 )
+color_ramp = SubResource( 3 )
 
 [node name="RifleBeam" type="Node2D"]
 script = ExtResource( 2 )
@@ -46,7 +46,7 @@ shadow_item_cull_mask = -2146959360
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="Beam"]
 light_mask = 524289
-occluder = SubResource( 4 )
+occluder = SubResource( 1 )
 light_mask = 524289
 
 [node name="Begin" type="Position2D" parent="."]
@@ -59,7 +59,7 @@ emitting = false
 amount = 2
 lifetime = 0.1
 preprocess = 0.25
-process_material = SubResource( 3 )
+process_material = SubResource( 4 )
 texture = ExtResource( 1 )
 
 [node name="RayCast2D" type="RayCast2D" parent="."]

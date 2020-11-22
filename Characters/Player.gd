@@ -73,7 +73,7 @@ func _physics_process(delta):
 	elif current_state == "stab":
 		velocity = stab_state(velocity)
 	elif current_state == "dead":
-		knockback(50, delta)
+		to_menu(delta)
 	else:
 		# if no action state is applied
 		# but movement controls are pressed
@@ -427,14 +427,14 @@ func knockback(power, delta):
 		# return no velocity
 
 		velocity = move_and_slide(Vector2.ZERO)
-
-		if back_to_menu.is_ready():
-			get_tree().change_scene("res://UI/TitleScreen.tscn")
-		else:
-			back_to_menu.tick(delta)
-
 	else:
 		# during knockback, apply linear velocity based
 		# on last vector
 		velocity = move_and_slide(Vector2(last_vector.x * -power, -1), Globals.UP)
 		knockdown_duration.tick(delta)
+
+func to_menu(delta):
+	if back_to_menu.is_ready():
+		get_tree().change_scene("res://UI/TitleScreen.tscn")
+	else:
+		back_to_menu.tick(delta)
