@@ -60,4 +60,13 @@ position = Vector2( 252.968, 518.579 )
 [node name="EmergencyLight4" parent="." instance=ExtResource( 6 )]
 position = Vector2( 146.57, 518.427 )
 
+[node name="ShadowHound2" parent="." instance=ExtResource( 5 )]
+position = Vector2( 60.5167, 465.717 )
+
+[node name="ShadowHound3" parent="." instance=ExtResource( 5 )]
+position = Vector2( 734.107, 475.54 )
+
+[node name="ShadowHound4" parent="." instance=ExtResource( 5 )]
+position = Vector2( 209.898, 403.455 )
+
 [editable path="Tiles"]
