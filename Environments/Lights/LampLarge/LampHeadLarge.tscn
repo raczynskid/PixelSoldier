@@ -1,0 +1,34 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Sprites/Lights/LampLong.png" type="Texture" id=1]
+[ext_resource path="res://Sprites/Lights/LargeLampLight.png" type="Texture" id=2]
+
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 5.27744
+height = 29.6217
+
+[node name="LampHeadLarge" type="RigidBody2D"]
+gravity_scale = 4.0
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 1 )
+
+[node name="PinJoint2DLeft" type="PinJoint2D" parent="."]
+position = Vector2( -13, -4 )
+
+[node name="PinJoint2DRight" type="PinJoint2D" parent="."]
+position = Vector2( 15, -4 )
+
+[node name="Light2D" type="Light2D" parent="."]
+position = Vector2( 1.22205, -19.766 )
+texture = ExtResource( 2 )
+offset = Vector2( 0, 50 )
+texture_scale = 0.1
+mode = 2
+shadow_enabled = true
+shadow_item_cull_mask = -2147483647
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0.445953, 0.148651 )
+rotation = 4.71239
+shape = SubResource( 1 )
