@@ -1,4 +1,4 @@
-[gd_scene load_steps=64 format=2]
+[gd_scene load_steps=68 format=2]
 
 [ext_resource path="res://Weapons/RifleBeam.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Spritesheets/Soldat.png" type="Texture" id=2]
@@ -7,6 +7,9 @@
 [ext_resource path="res://Characters/knife_hurtbox.gd" type="Script" id=5]
 [ext_resource path="res://UI/Control.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Characters/Player.gd" type="Script" id=7]
+
+[sub_resource type="AnimationNodeAnimation" id=58]
+animation = "Climb"
 
 [sub_resource type="AnimationNodeAnimation" id=1]
 animation = "DieLeft"
@@ -132,7 +135,13 @@ switch_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=35]
 
+[sub_resource type="AnimationNodeStateMachineTransition" id=59]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=60]
+
 [sub_resource type="AnimationNodeStateMachine" id=36]
+states/Climb/node = SubResource( 58 )
+states/Climb/position = Vector2( 816, -58 )
 states/Die/node = SubResource( 3 )
 states/Die/position = Vector2( 457, -1 )
 states/Idle/node = SubResource( 6 )
@@ -147,11 +156,28 @@ states/Slide/node = SubResource( 20 )
 states/Slide/position = Vector2( 840, 388 )
 states/Stab/node = SubResource( 23 )
 states/Stab/position = Vector2( 1451, 229 )
-transitions = [ "Idle", "Shoot", SubResource( 24 ), "Idle", "Run", SubResource( 25 ), "Run", "Idle", SubResource( 26 ), "Idle", "Roll", SubResource( 27 ), "Roll", "Idle", SubResource( 28 ), "Run", "Slide", SubResource( 29 ), "Slide", "Run", SubResource( 30 ), "Shoot", "Idle", SubResource( 31 ), "Idle", "Stab", SubResource( 32 ), "Stab", "Idle", SubResource( 33 ), "Run", "Stab", SubResource( 34 ), "Idle", "Die", SubResource( 35 ) ]
+transitions = [ "Idle", "Shoot", SubResource( 24 ), "Idle", "Run", SubResource( 25 ), "Run", "Idle", SubResource( 26 ), "Idle", "Roll", SubResource( 27 ), "Roll", "Idle", SubResource( 28 ), "Run", "Slide", SubResource( 29 ), "Slide", "Run", SubResource( 30 ), "Shoot", "Idle", SubResource( 31 ), "Idle", "Stab", SubResource( 32 ), "Stab", "Idle", SubResource( 33 ), "Run", "Stab", SubResource( 34 ), "Idle", "Die", SubResource( 35 ), "Idle", "Climb", SubResource( 59 ), "Climb", "Idle", SubResource( 60 ) ]
 start_node = "Idle"
 graph_offset = Vector2( -34, -111 )
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=37]
+
+[sub_resource type="Animation" id=57]
+resource_name = "Climb"
+length = 0.4
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Body:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 56, 57 ]
+}
 
 [sub_resource type="Animation" id=38]
 length = 0.7
@@ -659,6 +685,7 @@ parameters/Stab/blend_position = -0.00218683
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 playback_process_mode = 0
+anims/Climb = SubResource( 57 )
 anims/DieLeft = SubResource( 38 )
 anims/DieRight = SubResource( 39 )
 anims/IdleLeft = SubResource( 40 )
@@ -706,8 +733,8 @@ position = Vector2( 0, -5.483 )
 [node name="Body" type="Sprite" parent="."]
 position = Vector2( 0, -6 )
 texture = ExtResource( 2 )
-hframes = 56
-frame = 6
+hframes = 58
+frame = 57
 
 [node name="ActionPivot" type="Position2D" parent="."]
 script = ExtResource( 4 )

@@ -8,10 +8,12 @@ var fire : float
 var roll : float
 var slide : float
 var stab : float
+var climb : float
 var force_reload : float
 var reload : bool
 var roll_enabled = true
 var can_shoot = true
+var can_climb : bool = false
 var dead : bool = false
 var ammo = Globals.RIFLE_MAX_AMMO
 var hp = Globals.PLAYER_MAX_HP
@@ -56,7 +58,8 @@ func _physics_process(delta):
 	health_bar.value = hp
 
 	# apply gravity to player
-	velocity = gravity_modifiers(delta, velocity)
+	if not current_state in ["climb"]:
+		velocity = gravity_modifiers(delta, velocity)
 
 	# get arrow key inputs
 	input_vector = get_movement_inputs()
@@ -72,6 +75,12 @@ func _physics_process(delta):
 		velocity = slide_state(velocity)
 	elif current_state == "stab":
 		velocity = stab_state(velocity)
+	elif current_state == "climb":
+
+		# TODO : setup climbing state
+		# placeholder for climbing
+		global_position.y -= 1
+		# =====
 	elif current_state == "dead":
 		to_menu(delta)
 	else:
@@ -136,7 +145,7 @@ func get_action_inputs(delta):
 	slide = Input.get_action_strength("slide")
 	force_reload = Input.is_action_just_pressed("reload")
 	stab = Input.is_action_just_pressed("stab") or current_state in ["stab"]
-
+	climb = (Input.get_action_strength("ui_up") and can_climb)
 	# force reload state on input
 	if force_reload:
 		ammo = 0
@@ -195,6 +204,12 @@ func get_action_inputs(delta):
 			animationState.travel("Slide")
 			# perform slide in direction of movement
 			return "slide"
+
+	if climb:
+		# change animation to climbing
+		animationState.travel("Climb")
+		# switch state to climb
+		return "climb"
 
 func idle_state(vector):
 	# vector : last_vector
