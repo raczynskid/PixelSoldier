@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Sprites/Lights/SingleLampLight.png" type="Texture" id=1]
+[ext_resource path="res://Environments/Lights/EmergencyLight/Light2D.gd" type="Script" id=2]
+
+[node name="AlarmLight" type="Node2D"]
+position = Vector2( 0, -10.1581 )
+
+[node name="Light2D" type="Light2D" parent="."]
+position = Vector2( -4.54747e-14, 10.3013 )
+scale = Vector2( 1, 1 )
+texture = ExtResource( 1 )
+texture_scale = 0.03
+color = Color( 1, 0.905882, 0.278431, 1 )
+mode = 2
+script = ExtResource( 2 )

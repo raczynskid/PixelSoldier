@@ -10,6 +10,7 @@ var slide : float
 var stab : float
 var climb : float
 var force_reload : float
+var enter_door : float
 var reload : bool
 var roll_enabled = true
 var can_shoot = true
@@ -17,6 +18,7 @@ var can_climb : bool = false
 var dead : bool = false
 var ammo = Globals.RIFLE_MAX_AMMO
 var hp = Globals.PLAYER_MAX_HP
+var active_door = null
 
 # load vectors
 var velocity = Vector2.ZERO
@@ -146,6 +148,8 @@ func get_action_inputs(delta):
 	force_reload = Input.is_action_just_pressed("reload")
 	stab = Input.is_action_just_pressed("stab") or current_state in ["stab"]
 	climb = (Input.get_action_strength("ui_up") and can_climb)
+	enter_door = (Input.get_action_strength("ui_up") and active_door != null)
+
 	# force reload state on input
 	if force_reload:
 		ammo = 0
@@ -158,7 +162,15 @@ func get_action_inputs(delta):
 			dead = die(last_vector)
 		return "dead"
 	
+	if enter_door:
+		# if player is within door area2D
+		# transport player to destination
+		# destination scene is set as attribute
+		# of door object
+		get_tree().change_scene(active_door)
+	
 	if stab:
+		# use melee attack
 		animationTree.set("parameters/Stab/blend_position", last_vector.x)
 		animationState.travel('Stab')
 		input_vector.x = 0
@@ -180,7 +192,10 @@ func get_action_inputs(delta):
 				animationState.travel('Shoot')
 			return "shoot"
 	else:
+		# return to idle state if
+		# key released or out of ammo
 		idle_state(last_vector)
+		# stop drawing rounds and riochet particles
 		beam.get_node("Beam").visible = false
 		beam.get_node("End/Ricochet").emitting = false
 		
