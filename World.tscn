@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Environments/Tiles.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Characters/Player.tscn" type="PackedScene" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://Environments/DamageArea.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Characters/ShadowHound.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Environments/Interactable/Door.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Environments/Interactable/Barrel.tscn" type="PackedScene" id=7]
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=1]
 
@@ -16,52 +17,8 @@ __meta__ = {
 
 [node name="Level" type="Node" parent="."]
 
-[node name="Player" parent="Level" instance=ExtResource( 2 )]
-position = Vector2( 259.181, 201.088 )
-
-[node name="AnimationTree" parent="Level/Player" index="0"]
-process_mode = 0
-parameters/playback = SubResource( 1 )
-parameters/Die/blend_position = 0
-parameters/Roll/blend_position = 0.00343645
-parameters/Stab/blend_position = 0
-
-[node name="AnimationPlayer" parent="Level/Player" index="1"]
-method_call_mode = 1
-
-[node name="UI" parent="Level/Player" index="8"]
-scale = Vector2( 2, 2 )
-transform = Transform2D( 2, 0, 0, 2, 0, 0 )
-
-[node name="Label" type="Label" parent="Level/Player"]
-margin_left = -27.9873
-margin_top = -30.6877
-margin_right = 12.0127
-margin_bottom = -16.6877
-rect_scale = Vector2( 0.5, 0.5 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Label2" type="Label" parent="Level/Player"]
-margin_left = 6.44521
-margin_top = -11.6173
-margin_right = 46.4452
-margin_bottom = 2.38266
-rect_scale = Vector2( 0.5, 0.5 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Label3" type="Label" parent="Level/Player"]
-margin_left = -27.1664
-margin_top = -20.5188
-margin_right = 12.8336
-margin_bottom = -6.51875
-rect_scale = Vector2( 0.5, 0.5 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="Barrel" parent="Level" instance=ExtResource( 7 )]
+position = Vector2( 457.688, 480.466 )
 
 [node name="Tiles" parent="Level" instance=ExtResource( 1 )]
 
@@ -116,10 +73,57 @@ position = Vector2( 440.393, 266.412 )
 [node name="Node2D" parent="Level" instance=ExtResource( 4 )]
 position = Vector2( 628.195, 501.957 )
 
+[node name="Player" parent="Level" instance=ExtResource( 2 )]
+position = Vector2( 524.754, 526.426 )
+
+[node name="AnimationTree" parent="Level/Player" index="0"]
+process_mode = 0
+parameters/playback = SubResource( 1 )
+parameters/Die/blend_position = 0
+parameters/Roll/blend_position = 0.00343645
+parameters/Stab/blend_position = 0
+
+[node name="AnimationPlayer" parent="Level/Player" index="1"]
+method_call_mode = 1
+
+[node name="UI" parent="Level/Player" index="8"]
+scale = Vector2( 2, 2 )
+transform = Transform2D( 2, 0, 0, 2, 0, 0 )
+
+[node name="Label" type="Label" parent="Level/Player"]
+margin_left = -27.9873
+margin_top = -30.6877
+margin_right = 12.0127
+margin_bottom = -16.6877
+rect_scale = Vector2( 0.5, 0.5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label2" type="Label" parent="Level/Player"]
+margin_left = 6.44521
+margin_top = -11.6173
+margin_right = 46.4452
+margin_bottom = 2.38266
+rect_scale = Vector2( 0.5, 0.5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label3" type="Label" parent="Level/Player"]
+margin_left = -27.1664
+margin_top = -20.5188
+margin_right = 12.8336
+margin_bottom = -6.51875
+rect_scale = Vector2( 0.5, 0.5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="Door" parent="." instance=ExtResource( 6 )]
-position = Vector2( 521.255, 534.499 )
+position = Vector2( 535.971, 533.658 )
 destination = "res://Levels/Arena.tscn"
 
-[editable path="Level/Player"]
-
 [editable path="Level/Tiles"]
+
+[editable path="Level/Player"]

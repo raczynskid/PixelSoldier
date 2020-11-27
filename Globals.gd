@@ -27,3 +27,4 @@ const SHADOWHOUND_MAX_SPEED = 100
 # destructibles
 
 const CABLE_HP = 20
+const BARREL_HP = 20

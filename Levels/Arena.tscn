@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Environments/Tiles.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Characters/Player.tscn" type="PackedScene" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://Environments/Lights/LampLarge/LampLarge.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Environments/Interactable/Ladder.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Environments/Interactable/Door.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Environments/Interactable/Barrel.tscn" type="PackedScene" id=11]
 
 [node name="Arena" type="Node"]
 
@@ -45,7 +46,7 @@ z_index = 11
 color = Color( 0, 0, 0, 0.509804 )
 
 [node name="ShadowHound" parent="." instance=ExtResource( 5 )]
-position = Vector2( 602.794, 424.881 )
+position = Vector2( 637.265, 524.036 )
 
 [node name="EmergencyLight" parent="." instance=ExtResource( 6 )]
 position = Vector2( 371.116, 518.776 )
@@ -66,7 +67,7 @@ position = Vector2( 146.57, 518.427 )
 position = Vector2( 60.5167, 465.717 )
 
 [node name="ShadowHound3" parent="." instance=ExtResource( 5 )]
-position = Vector2( 734.107, 475.54 )
+position = Vector2( 728.759, 463.96 )
 
 [node name="ShadowHound4" parent="." instance=ExtResource( 5 )]
 position = Vector2( 209.898, 403.455 )
@@ -83,5 +84,11 @@ position = Vector2( 407.602, 504.145 )
 [node name="Door" parent="." instance=ExtResource( 10 )]
 position = Vector2( 696.266, 534.036 )
 destination = "res://World.tscn"
+
+[node name="Barrel" parent="." instance=ExtResource( 11 )]
+position = Vector2( 370.997, 534.963 )
+
+[node name="Barrel2" parent="." instance=ExtResource( 11 )]
+position = Vector2( 602.221, 520.916 )
 
 [editable path="Tiles"]
