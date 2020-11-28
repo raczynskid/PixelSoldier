@@ -96,10 +96,6 @@ func _physics_process(delta):
 		last_vector = velocity
 
 	# debug nodes
-	if not dead:
-		get_node("HPLabel").text = "hp: " + var2str(hp)
-	else:
-		get_node("HPLabel").text = "dead AF"
 
 func switch_animation_dmg_overlay():
 	if (animationTree.anim_player != "../LightDmgAnimationPlayer") and (hp < (Globals.SHADOWHOUND_MAX_HP * 0.70)):
@@ -110,9 +106,6 @@ func switch_animation_dmg_overlay():
 func die():
 	# set dead state
 	dead = true
-
-	# disable collisions
-	get_node("Hurtbox/CollisionShape2D").disabled = true
 
 	# play death animation
 	animationTree.set("parameters/Die/blend_position", last_vector.x)
@@ -171,7 +164,6 @@ func attack_state():
 	# check which body is being collided with
 	melee_collider = meleeRaycast.get_collider()
 	collision_body = melee_collider.get_parent()
-
 	# only engage when player 
 	if collision_body.name == "Player":
 

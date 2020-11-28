@@ -46,7 +46,7 @@ z_index = 11
 color = Color( 0, 0, 0, 0.509804 )
 
 [node name="ShadowHound" parent="." instance=ExtResource( 5 )]
-position = Vector2( 637.265, 524.036 )
+position = Vector2( 354.388, 528.18 )
 
 [node name="EmergencyLight" parent="." instance=ExtResource( 6 )]
 position = Vector2( 371.116, 518.776 )
@@ -66,12 +66,6 @@ position = Vector2( 146.57, 518.427 )
 [node name="ShadowHound2" parent="." instance=ExtResource( 5 )]
 position = Vector2( 60.5167, 465.717 )
 
-[node name="ShadowHound3" parent="." instance=ExtResource( 5 )]
-position = Vector2( 728.759, 463.96 )
-
-[node name="ShadowHound4" parent="." instance=ExtResource( 5 )]
-position = Vector2( 209.898, 403.455 )
-
 [node name="Ladder" parent="." instance=ExtResource( 9 )]
 position = Vector2( 407.602, 536.18 )
 
@@ -89,6 +83,6 @@ destination = "res://World.tscn"
 position = Vector2( 370.997, 534.963 )
 
 [node name="Barrel2" parent="." instance=ExtResource( 11 )]
-position = Vector2( 602.221, 520.916 )
+position = Vector2( 587.389, 516.036 )
 
 [editable path="Tiles"]
