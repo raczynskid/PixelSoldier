@@ -1,4 +1,4 @@
-[gd_scene load_steps=63 format=2]
+[gd_scene load_steps=74 format=2]
 
 [ext_resource path="res://Characters/ShadowHound.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/Characters/Enemies/zombiedog-Sheet.png" type="Texture" id=2]
@@ -150,6 +150,38 @@ tracks/0/keys = {
 "values": [ 13 ]
 }
 
+[sub_resource type="Animation" id=60]
+resource_name = "JumpAttackLeft"
+length = 0.9
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 24, 25, 26, 27, 28, 29, 30, 31 ]
+}
+
+[sub_resource type="Animation" id=61]
+resource_name = "JumpAttackRight"
+length = 0.9
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 32, 33, 34, 35, 36, 37, 38, 39 ]
+}
+
 [sub_resource type="Animation" id=11]
 length = 0.5
 loop = true
@@ -227,7 +259,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 50, 51, 52, 53, 54 ]
+"values": [ 66, 67, 68, 69, 70 ]
 }
 tracks/1/type = "method"
 tracks/1/path = NodePath(".")
@@ -258,7 +290,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 55, 56, 57, 58, 59 ]
+"values": [ 71, 72, 73, 74, 75 ]
 }
 tracks/1/type = "method"
 tracks/1/path = NodePath(".")
@@ -288,7 +320,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 96, 97, 98, 99, 100, 101 ]
+"values": [ 144, 145, 146, 147, 148, 149 ]
 }
 
 [sub_resource type="Animation" id=18]
@@ -304,7 +336,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 102, 103, 104, 105, 106, 107 ]
+"values": [ 150, 151, 152, 153, 154, 155 ]
 }
 
 [sub_resource type="Animation" id=19]
@@ -319,7 +351,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ 48 ]
+"values": [ 64 ]
 }
 
 [sub_resource type="Animation" id=20]
@@ -334,7 +366,39 @@ tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ 49 ]
+"values": [ 65 ]
+}
+
+[sub_resource type="Animation" id=63]
+resource_name = "JumpAttackLeft"
+length = 0.9
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 76, 77, 78, 79, 80, 81, 82, 83 ]
+}
+
+[sub_resource type="Animation" id=62]
+resource_name = "JumpAttackRight"
+length = 0.9
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 84, 85, 86, 87, 88, 89, 90, 91 ]
 }
 
 [sub_resource type="Animation" id=21]
@@ -350,7 +414,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 38, 39, 40, 41 ]
+"values": [ 54, 55, 56, 57 ]
 }
 
 [sub_resource type="Animation" id=22]
@@ -366,7 +430,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 44, 45, 46, 47 ]
+"values": [ 60, 61, 62, 63 ]
 }
 
 [sub_resource type="Animation" id=23]
@@ -382,7 +446,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.1 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ 36, 37 ]
+"values": [ 52, 53 ]
 }
 
 [sub_resource type="Animation" id=24]
@@ -397,7 +461,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.1 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ 42, 43 ]
+"values": [ 58, 59 ]
 }
 
 [sub_resource type="Animation" id=25]
@@ -414,7 +478,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 86, 87, 88, 89, 90 ]
+"values": [ 118, 119, 120, 121, 122 ]
 }
 tracks/1/type = "method"
 tracks/1/path = NodePath(".")
@@ -445,7 +509,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 91, 92, 93, 94, 95 ]
+"values": [ 123, 124, 125, 126, 127 ]
 }
 tracks/1/type = "method"
 tracks/1/path = NodePath(".")
@@ -475,7 +539,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 96, 97, 98, 99, 100, 101 ]
+"values": [ 144, 145, 146, 147, 148, 149 ]
 }
 
 [sub_resource type="Animation" id=28]
@@ -491,7 +555,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5 ),
 "transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 102, 103, 104, 105, 106, 107 ]
+"values": [ 150, 151, 152, 153, 154, 155 ]
 }
 
 [sub_resource type="Animation" id=29]
@@ -506,7 +570,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ 84 ]
+"values": [ 116 ]
 }
 
 [sub_resource type="Animation" id=30]
@@ -521,7 +585,39 @@ tracks/0/keys = {
 "times": PoolRealArray( 0 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
-"values": [ 85 ]
+"values": [ 117 ]
+}
+
+[sub_resource type="Animation" id=64]
+resource_name = "JumpAttackLeft"
+length = 0.9
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 128, 129, 130, 131, 132, 133, 134, 135 ]
+}
+
+[sub_resource type="Animation" id=65]
+resource_name = "JumpAttackRight"
+length = 0.9
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 136, 137, 138, 139, 140, 141, 142, 143 ]
 }
 
 [sub_resource type="Animation" id=31]
@@ -537,7 +633,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 74, 75, 76, 77 ]
+"values": [ 106, 107, 108, 109 ]
 }
 
 [sub_resource type="Animation" id=32]
@@ -553,7 +649,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.1, 0.2, 0.3 ),
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 80, 81, 82, 83 ]
+"values": [ 112, 113, 114, 115 ]
 }
 
 [sub_resource type="Animation" id=33]
@@ -569,7 +665,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.1 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ 72, 73 ]
+"values": [ 104, 105 ]
 }
 
 [sub_resource type="Animation" id=34]
@@ -584,7 +680,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.1 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ 78, 79 ]
+"values": [ 110, 111 ]
 }
 
 [sub_resource type="AnimationNodeAnimation" id=35]
@@ -621,6 +717,18 @@ animation = "IdleRight"
 blend_point_0/node = SubResource( 41 )
 blend_point_0/pos = -0.5
 blend_point_1/node = SubResource( 42 )
+blend_point_1/pos = 0.5
+
+[sub_resource type="AnimationNodeAnimation" id=66]
+animation = "JumpAttackLeft"
+
+[sub_resource type="AnimationNodeAnimation" id=67]
+animation = "JumpAttackRight"
+
+[sub_resource type="AnimationNodeBlendSpace1D" id=68]
+blend_point_0/node = SubResource( 66 )
+blend_point_0/pos = -0.5
+blend_point_1/node = SubResource( 67 )
 blend_point_1/pos = 0.5
 
 [sub_resource type="AnimationNodeAnimation" id=44]
@@ -662,6 +770,11 @@ switch_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=56]
 
+[sub_resource type="AnimationNodeStateMachineTransition" id=69]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=70]
+switch_mode = 2
+
 [sub_resource type="AnimationNodeStateMachine" id=57]
 states/Attack/node = SubResource( 37 )
 states/Attack/position = Vector2( 906, 254 )
@@ -669,11 +782,13 @@ states/Die/node = SubResource( 40 )
 states/Die/position = Vector2( 883, 100 )
 states/Idle/node = SubResource( 43 )
 states/Idle/position = Vector2( 1136, 188 )
+states/JumpAttack/node = SubResource( 68 )
+states/JumpAttack/position = Vector2( 1128, 365 )
 states/Run/node = SubResource( 46 )
 states/Run/position = Vector2( 1607, 233 )
 states/Walk/node = SubResource( 49 )
 states/Walk/position = Vector2( 1348, 233 )
-transitions = [ "Idle", "Walk", SubResource( 50 ), "Walk", "Idle", SubResource( 51 ), "Walk", "Run", SubResource( 52 ), "Run", "Walk", SubResource( 53 ), "Idle", "Die", SubResource( 54 ), "Attack", "Idle", SubResource( 55 ), "Idle", "Attack", SubResource( 56 ) ]
+transitions = [ "Idle", "Walk", SubResource( 50 ), "Walk", "Idle", SubResource( 51 ), "Walk", "Run", SubResource( 52 ), "Run", "Walk", SubResource( 53 ), "Idle", "Die", SubResource( 54 ), "Attack", "Idle", SubResource( 55 ), "Idle", "Attack", SubResource( 56 ), "Idle", "JumpAttack", SubResource( 69 ), "JumpAttack", "Idle", SubResource( 70 ) ]
 start_node = "Idle"
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=58]
@@ -710,7 +825,7 @@ __meta__ = {
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 2 )
 vframes = 3
-hframes = 36
+hframes = 52
 frame = 13
 
 [node name="FullHPAnimationPlayer" type="AnimationPlayer" parent="."]
@@ -722,6 +837,8 @@ anims/DieLeft = SubResource( 7 )
 anims/DieRight = SubResource( 8 )
 anims/IdleLeft = SubResource( 9 )
 anims/IdleRight = SubResource( 10 )
+anims/JumpAttackLeft = SubResource( 60 )
+anims/JumpAttackRight = SubResource( 61 )
 anims/RunLeft = SubResource( 11 )
 anims/RunRight = SubResource( 12 )
 anims/WalkLeft = SubResource( 13 )
@@ -736,6 +853,8 @@ anims/DieLeft = SubResource( 17 )
 anims/DieRight = SubResource( 18 )
 anims/IdleLeft = SubResource( 19 )
 anims/IdleRight = SubResource( 20 )
+anims/JumpAttackLeft = SubResource( 63 )
+anims/JumpAttackRight = SubResource( 62 )
 anims/RunLeft = SubResource( 21 )
 anims/RunRight = SubResource( 22 )
 anims/WalkLeft = SubResource( 23 )
@@ -750,6 +869,8 @@ anims/DieLeft = SubResource( 27 )
 anims/DieRight = SubResource( 28 )
 anims/IdleLeft = SubResource( 29 )
 anims/IdleRight = SubResource( 30 )
+anims/JumpAttackLeft = SubResource( 64 )
+anims/JumpAttackRight = SubResource( 65 )
 anims/RunLeft = SubResource( 31 )
 anims/RunRight = SubResource( 32 )
 anims/WalkLeft = SubResource( 33 )
@@ -763,6 +884,7 @@ parameters/playback = SubResource( 58 )
 parameters/Attack/blend_position = 0.00072515
 parameters/Die/blend_position = 0
 parameters/Idle/blend_position = 0.0
+parameters/JumpAttack/blend_position = 0
 parameters/Run/blend_position = 0
 parameters/Walk/blend_position = 0
 
