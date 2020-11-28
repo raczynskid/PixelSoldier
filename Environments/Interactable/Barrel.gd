@@ -78,6 +78,5 @@ func hurt_body(body):
 	# apply damage based on distance
 	if "hp" in body:
 		var dmg = (100 - round(dist))
-		print(dmg)
 		body.hp -= dmg
 		hits.append(body)

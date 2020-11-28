@@ -19,6 +19,7 @@ onready var rifle_beam = player.get_node("RifleBeam")
 onready var active_sprite = get_node("Sprite")
 onready var playerDetectionZone = get_node("PlayerDetectionZone")
 onready var meleeRaycast = get_node("MeleeRaycast")
+onready var jumpAttackRaycast = get_node("JumpAttackRaycast")
 
 # load animation nodes
 onready var animationPlayer = get_node("FullHPAnimationPlayer")
@@ -69,14 +70,16 @@ func _physics_process(delta):
 				# if player exited detection zone, stop
 				velocity = Vector2.ZERO
 		
-		if not current_state in ["attack"]:
+		if not current_state in ["attack", "jump"]:
 			pick_animation(velocity)
 		
 		# if short horizontal detection raycast finds collision
 		if meleeRaycast.is_colliding():
 			# check if there is no attack in progress
-			if not current_state in ["attack"]:
+			if not current_state in ["attack", "jump"]:
 				attack_state()
+		if jumpAttackRaycast.is_colliding():
+			jump_attack_state()
 
 		velocity = gravity_modifiers(delta, velocity)
 
@@ -89,6 +92,10 @@ func _physics_process(delta):
 		elif hp <= 0:
 			die()
 	
+	if current_state == "rising":
+		# increase vertical velocity
+		# in jump state
+		velocity.y = -80
 	# apply velocity to kinematicbody2D
 	velocity = move_and_slide(velocity, Globals.UP)
 
@@ -102,7 +109,14 @@ func switch_animation_dmg_overlay():
 		animationTree.anim_player = "../LightDmgAnimationPlayer"
 	if (animationTree.anim_player != "../HeavyDmgAnimationPlayer") and (hp < (Globals.SHADOWHOUND_MAX_HP * 0.30)):
 		animationTree.anim_player = "../HeavyDmgAnimationPlayer"
+
+func rise():
+	current_state = "rising"
 		
+func fall():
+	pass
+
+
 func die():
 	# set dead state
 	dead = true
@@ -173,6 +187,23 @@ func attack_state():
 		animationTree.set("parameters/Attack/blend_position", last_vector.x)
 		animationState.travel("Attack")
 
+func jump_attack_state():
+
+		# check which body is being collided with
+		melee_collider = jumpAttackRaycast.get_collider()
+		collision_body = melee_collider.get_parent()
+
+		# only engage when player 
+		if collision_body.name == "Player":
+			# change state to jump attack
+			current_state = "jump"
+			
+
+			# play attack animation
+			animationTree.set("parameters/Attack/JumpAttack", last_vector.x)
+			animationState.travel("JumpAttack")
+
+
 func attack_end():
 	# method call from animation player
 	# BiteLeft and BiteRight
@@ -195,6 +226,10 @@ func attack_end():
 		
 	# reset enemy state
 	current_state = null
+
+func jump_attack_end():
+	# return to fight/chase state after jump attack
+	current_state = "chase"
 
 func rotate_raycast(vector):
 	# turn attack raycast to face
