@@ -30,8 +30,6 @@ func destroy():
 		destroy_effect.visible = true
 		# play electricity animation
 		destroy_effect.play()
-		while destroy_effect.get_frame() != 9:
-			pass
 		light.enabled = false
 		remove_child(joint)
 		apply_impulse(Vector2.ZERO, Vector2(10, 0))
