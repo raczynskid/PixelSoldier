@@ -38,14 +38,6 @@ position = Vector2( 97.5431, 458.006 )
 light_mask = 524289
 position = Vector2( 463.157, 419.323 )
 
-[node name="LampLarge" parent="." instance=ExtResource( 8 )]
-position = Vector2( 347.219, 480.299 )
-z_index = 11
-
-[node name="LampLarge2" parent="." instance=ExtResource( 8 )]
-position = Vector2( 230.678, 471.96 )
-z_index = 11
-
 [node name="CanvasModulate" parent="." instance=ExtResource( 3 )]
 color = Color( 0, 0, 0, 0.509804 )
 
@@ -88,5 +80,14 @@ position = Vector2( 370.997, 534.963 )
 
 [node name="Barrel2" parent="." instance=ExtResource( 11 )]
 position = Vector2( 587.389, 516.036 )
+
+[node name="LampLarge" parent="." instance=ExtResource( 8 )]
+position = Vector2( 353.357, 479.16 )
+
+[node name="LampLarge2" parent="." instance=ExtResource( 8 )]
+position = Vector2( 257.947, 479.913 )
+
+[node name="LampLarge3" parent="." instance=ExtResource( 8 )]
+position = Vector2( 182.742, 481.114 )
 
 [editable path="Tiles"]

@@ -1,14 +1,63 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://Sprites/Lights/LampLong.png" type="Texture" id=1]
 [ext_resource path="res://Sprites/Lights/LargeLampLight.png" type="Texture" id=2]
+[ext_resource path="res://Sprites/Effects/LampLongElectricDestroy-Sheet.png" type="Texture" id=3]
+[ext_resource path="res://Environments/Lights/LampLarge/LampHeadLarge.gd" type="Script" id=4]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 5.27744
 height = 29.6217
 
-[node name="LampHeadLarge" type="RigidBody2D"]
+[sub_resource type="AtlasTexture" id=3]
+atlas = ExtResource( 3 )
+region = Rect2( 0, 0, 51, 17 )
+
+[sub_resource type="AtlasTexture" id=4]
+atlas = ExtResource( 3 )
+region = Rect2( 0, 17, 51, 17 )
+
+[sub_resource type="AtlasTexture" id=5]
+atlas = ExtResource( 3 )
+region = Rect2( 0, 34, 51, 17 )
+
+[sub_resource type="AtlasTexture" id=6]
+atlas = ExtResource( 3 )
+region = Rect2( 0, 51, 51, 17 )
+
+[sub_resource type="AtlasTexture" id=7]
+atlas = ExtResource( 3 )
+region = Rect2( 0, 68, 51, 17 )
+
+[sub_resource type="AtlasTexture" id=8]
+atlas = ExtResource( 3 )
+region = Rect2( 0, 85, 51, 17 )
+
+[sub_resource type="AtlasTexture" id=9]
+atlas = ExtResource( 3 )
+region = Rect2( 0, 102, 51, 17 )
+
+[sub_resource type="AtlasTexture" id=10]
+atlas = ExtResource( 3 )
+region = Rect2( 0, 119, 51, 17 )
+
+[sub_resource type="AtlasTexture" id=11]
+atlas = ExtResource( 3 )
+region = Rect2( 0, 136, 51, 17 )
+
+[sub_resource type="SpriteFrames" id=2]
+animations = [ {
+"frames": [ SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ) ],
+"loop": true,
+"name": "ElectricDestroy",
+"speed": 15.0
+} ]
+
+[node name="LampHeadLarge" type="RigidBody2D" groups=[
+"destructibles",
+]]
 gravity_scale = 4.0
+script = ExtResource( 4 )
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 1 )
@@ -32,3 +81,9 @@ shadow_item_cull_mask = -2147483647
 position = Vector2( 0.445953, 0.148651 )
 rotation = 4.71239
 shape = SubResource( 1 )
+
+[node name="ElectricEffect" type="AnimatedSprite" parent="."]
+visible = false
+frames = SubResource( 2 )
+animation = "ElectricDestroy"
+frame = 1
