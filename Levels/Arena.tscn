@@ -14,6 +14,12 @@
 
 [node name="Arena" type="Node"]
 
+[node name="ShadowHound" parent="." instance=ExtResource( 5 )]
+position = Vector2( 64.5416, 473.96 )
+
+[node name="ShadowHound2" parent="." instance=ExtResource( 5 )]
+position = Vector2( 419.716, 534.963 )
+
 [node name="Tiles" parent="." instance=ExtResource( 1 )]
 light_mask = 524288
 
@@ -41,9 +47,6 @@ position = Vector2( 463.157, 419.323 )
 [node name="CanvasModulate" parent="." instance=ExtResource( 3 )]
 color = Color( 0, 0, 0, 0.509804 )
 
-[node name="ShadowHound" parent="." instance=ExtResource( 5 )]
-position = Vector2( 331.874, 483.913 )
-
 [node name="EmergencyLight" parent="." instance=ExtResource( 6 )]
 position = Vector2( 371.116, 518.776 )
 
@@ -58,9 +61,6 @@ position = Vector2( 252.968, 518.579 )
 
 [node name="EmergencyLight4" parent="." instance=ExtResource( 6 )]
 position = Vector2( 146.57, 518.427 )
-
-[node name="ShadowHound2" parent="." instance=ExtResource( 5 )]
-position = Vector2( 60.5167, 465.717 )
 
 [node name="Ladder" parent="." instance=ExtResource( 9 )]
 position = Vector2( 407.602, 536.18 )
