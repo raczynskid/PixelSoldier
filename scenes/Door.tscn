@@ -1,0 +1,33 @@
+[gd_scene load_steps=4 format=3 uid="uid://b5x7hawfdawit"]
+
+[ext_resource type="Script" path="res://scripts/Door.gd" id="1_7hrsg"]
+[ext_resource type="Texture2D" uid="uid://cqbhoq3ipgeta" path="res://assets/Door.png" id="1_s85vt"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_s7p6o"]
+size = Vector2(14, 20)
+
+[node name="Door" type="Node2D" groups=["interactable"]]
+script = ExtResource("1_7hrsg")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_s85vt")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_s7p6o")
+debug_color = Color(0.965887, 0, 0.483941, 0.42)
+
+[node name="Label" type="Label" parent="."]
+visible = false
+offset_left = -18.0
+offset_top = -18.0
+offset_right = 95.0
+offset_bottom = 5.0
+scale = Vector2(0.320001, 0.28)
+text = "'up' to interact"
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]

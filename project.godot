@@ -16,12 +16,25 @@ config/features=PackedStringArray("4.2", "Mobile")
 run/max_fps=60
 config/icon="res://icon.svg"
 
+[autoload]
+
+Signals="*res://scripts/Signals.gd"
+
 [display]
 
 window/size/viewport_width=260
 window/size/viewport_height=195
 window/size/mode=2
 window/stretch/mode="canvas_items"
+
+[file_customization]
+
+folder_colors={
+"res://assets/": "red",
+"res://levels/": "gray",
+"res://scenes/": "blue",
+"res://scripts/": "orange"
+}
 
 [input]
 

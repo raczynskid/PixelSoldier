@@ -30,4 +30,6 @@ func process_physics(_delta: float) -> State:
 		parent.animations.play(animation_name)
 	if Input.is_action_pressed('ui_left') or Input.is_action_pressed('ui_right'):
 		return run_state
+	if Input.is_action_just_pressed("ui_up"):
+		misc.interact()
 	return null

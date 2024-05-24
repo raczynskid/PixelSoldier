@@ -9,6 +9,9 @@ var hp : int = 3
 var animations = $AnimatedSprite2D
 @onready
 var state_machine = $StateMachine
+@onready
+var raycast_shoot = $RayCast2D
+
 
 var orientation = 0
 

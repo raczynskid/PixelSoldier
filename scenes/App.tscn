@@ -1,28 +1,17 @@
 [gd_scene load_steps=3 format=3 uid="uid://cdii6gi105y4p"]
 
+[ext_resource type="Script" path="res://scenes/App.gd" id="1_dpgjr"]
 [ext_resource type="PackedScene" uid="uid://digieibrt24qo" path="res://scenes/Player.tscn" id="1_oyy80"]
-[ext_resource type="PackedScene" uid="uid://w58n80hp18u8" path="res://scenes/placeholder.tscn" id="2_xt4qv"]
 
 [node name="App" type="Node2D"]
-
-[node name="Placeholder" parent="." instance=ExtResource("2_xt4qv")]
-position = Vector2(197, 239)
-
-[node name="Placeholder4" parent="." instance=ExtResource("2_xt4qv")]
-position = Vector2(323, 119)
-
-[node name="Placeholder5" parent="." instance=ExtResource("2_xt4qv")]
-position = Vector2(-55, 118)
-
-[node name="Placeholder2" parent="." instance=ExtResource("2_xt4qv")]
-position = Vector2(71, 239)
-
-[node name="Placeholder3" parent="." instance=ExtResource("2_xt4qv")]
-position = Vector2(82, 135)
-scale = Vector2(0.400001, 0.120001)
+script = ExtResource("1_dpgjr")
+start_level = "res://levels/Level1.tscn"
 
 [node name="Player" parent="." instance=ExtResource("1_oyy80")]
-position = Vector2(182, 77)
+z_index = 1
+position = Vector2(1, 0)
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 position_smoothing_enabled = true
+
+[node name="Map" type="Node" parent="."]
