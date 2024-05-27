@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://bt6d2nybfyiov"]
+[gd_scene load_steps=4 format=3 uid="uid://bt6d2nybfyiov"]
 
 [ext_resource type="PackedScene" uid="uid://b535c85fiuujm" path="res://scenes/TileMap.tscn" id="1_eh65k"]
 [ext_resource type="PackedScene" uid="uid://b5x7hawfdawit" path="res://scenes/Door.tscn" id="2_syieq"]
+[ext_resource type="PackedScene" uid="uid://bttpiefy08t5q" path="res://scenes/MeleeEnemy.tscn" id="3_i34rp"]
 
 [node name="Level1" type="Node"]
 
@@ -12,3 +13,6 @@ layer_0/tile_data = PackedInt32Array(327673, 65536, 1, 327674, 65536, 4, 327675,
 z_as_relative = false
 position = Vector2(-8, 54)
 target = "res://levels/Level2.tscn"
+
+[node name="MeleeEnemy" parent="." instance=ExtResource("3_i34rp")]
+position = Vector2(223, -17)

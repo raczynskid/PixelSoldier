@@ -265,7 +265,7 @@ animations = [{
 radius = 4.0
 height = 12.0
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" groups=["Player"]]
 collision_layer = 5
 script = ExtResource("1_dub0a")
 max_speed = 300
@@ -326,5 +326,6 @@ offset_bottom = 23.0
 [node name="RayCast2D" type="RayCast2D" parent="."]
 target_position = Vector2(129, 0)
 collision_mask = 3
+collide_with_areas = true
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="StateMachine/Roll" method="_on_animated_sprite_2d_animation_finished"]
