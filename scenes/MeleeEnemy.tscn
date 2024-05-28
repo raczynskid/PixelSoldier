@@ -122,7 +122,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_s8oag")
 }],
-"loop": true,
+"loop": false,
 "name": &"Die",
 "speed": 5.0
 }, {
@@ -171,12 +171,13 @@ height = 14.0
 radius = 7.0
 height = 18.0
 
-[node name="MeleeEnemy" type="CharacterBody2D"]
+[node name="MeleeEnemy" type="CharacterBody2D" groups=["Enemies"]]
 script = ExtResource("1_mx363")
+hp = 100
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_phs0b")
-animation = &"Idle"
+animation = &"Die"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(1, 6)
@@ -217,9 +218,10 @@ animation_name = "Die"
 script = ExtResource("5_x8alu")
 animation_name = "Idle"
 
-[node name="Attack" type="Node" parent="StateMachine" node_paths=PackedStringArray("chase_state")]
+[node name="Attack" type="Node" parent="StateMachine" node_paths=PackedStringArray("chase_state", "die_state")]
 script = ExtResource("6_gwqg3")
 chase_state = NodePath("../Chase")
+die_state = NodePath("../Die")
 animation_name = "Attack"
 
 [node name="Patrol" type="Node" parent="StateMachine" node_paths=PackedStringArray("idle_state", "chase_state")]
@@ -230,11 +232,12 @@ patrol_speed = 50
 animation_name = "Walk"
 move_speed = 100.0
 
-[node name="Chase" type="Node" parent="StateMachine" node_paths=PackedStringArray("idle_state", "attack_state", "patrol_state")]
+[node name="Chase" type="Node" parent="StateMachine" node_paths=PackedStringArray("idle_state", "attack_state", "patrol_state", "die_state")]
 script = ExtResource("8_frwah")
 idle_state = NodePath("../Idle")
 attack_state = NodePath("../Attack")
 patrol_state = NodePath("../Patrol")
+die_state = NodePath("../Die")
 chase_speed = 60
 animation_name = "Run"
 
@@ -243,7 +246,8 @@ offset_right = 40.0
 offset_bottom = 23.0
 
 [node name="Debug2" type="Label" parent="."]
+offset_top = -15.0
 offset_right = 40.0
-offset_bottom = 23.0
+offset_bottom = 8.0
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="StateMachine/Attack" method="_on_animated_sprite_2d_animation_finished"]

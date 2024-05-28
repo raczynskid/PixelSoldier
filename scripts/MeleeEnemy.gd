@@ -15,6 +15,10 @@ var raycast_nav = $NavigationRaycast
 var raycast_attack = $AttackRaycast
 @onready
 var raycast_ground = $GroundRaycast
+@onready
+var hitbox = $Hitbox/CollisionShape2D
+@onready
+var collisions = $CollisionShape2D
 
 @onready
 var player_target = get_tree().get_nodes_in_group("Player")[0]

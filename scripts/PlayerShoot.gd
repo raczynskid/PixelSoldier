@@ -7,6 +7,9 @@ func shoot(called_from_node : String):
 	parent.animations.play("Shoot" + called_from_node)
 	if parent.raycast_shoot.is_colliding():
 		spawn_particles()
+		var target = parent.raycast_shoot.get_collider().get_owner()
+		if target.is_in_group("Enemies"):
+			target.hp -= 1
 
 func spawn_particles() -> void:
 	var collider = parent.raycast_shoot.get_collider()

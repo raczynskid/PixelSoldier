@@ -7,6 +7,8 @@ var attack_state : State
 @export
 var patrol_state : State
 @export
+var die_state : State
+@export
 var chase_speed : int = 200
 
 var direction : Vector2
@@ -34,7 +36,12 @@ func exit() -> void:
 	return
 
 func process_physics(delta: float) -> State:
+	
+	if parent.hp <= 0:
+		return die_state
+	
 	# when ticker elapses, return to patrol state
+	
 	if timer > 0:
 		timer -= delta
 	else:
