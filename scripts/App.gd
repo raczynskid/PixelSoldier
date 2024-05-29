@@ -14,7 +14,6 @@ func load_level(level : String) -> void:
 	var level_to_load = load(level).instantiate()
 	map.add_child(level_to_load)
 
-
 func swap_level(to_level : String) -> void:
 	for child in map.get_children():
 		child.queue_free()

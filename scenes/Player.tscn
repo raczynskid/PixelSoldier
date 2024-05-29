@@ -315,6 +315,7 @@ idle_state = NodePath("../Idle")
 animation_name = "Roll"
 
 [node name="Debug" type="Label" parent="."]
+visible = false
 offset_right = 40.0
 offset_bottom = 23.0
 
@@ -328,4 +329,8 @@ target_position = Vector2(129, 0)
 collision_mask = 3
 collide_with_areas = true
 
+[node name="ReloadTimer" type="Timer" parent="."]
+one_shot = true
+
 [connection signal="animation_finished" from="AnimatedSprite2D" to="StateMachine/Roll" method="_on_animated_sprite_2d_animation_finished"]
+[connection signal="timeout" from="ReloadTimer" to="StateMachine/Shoot" method="_on_reload_timer_timeout"]

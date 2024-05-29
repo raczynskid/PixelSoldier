@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://cdii6gi105y4p"]
+[gd_scene load_steps=4 format=3 uid="uid://cdii6gi105y4p"]
 
 [ext_resource type="Script" path="res://scripts/App.gd" id="1_dpgjr"]
 [ext_resource type="PackedScene" uid="uid://digieibrt24qo" path="res://scenes/Player.tscn" id="1_oyy80"]
+[ext_resource type="PackedScene" uid="uid://dqpqhuwb4vckm" path="res://scenes/UI.tscn" id="3_kb1r8"]
 
 [node name="App" type="Node2D"]
 script = ExtResource("1_dpgjr")
@@ -13,5 +14,11 @@ position = Vector2(1, 0)
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 position_smoothing_enabled = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="Player/Camera2D"]
+
+[node name="UI" parent="Player/Camera2D/CanvasLayer" instance=ExtResource("3_kb1r8")]
+offset_left = 1.0
+offset_right = 1.0
 
 [node name="Map" type="Node" parent="."]

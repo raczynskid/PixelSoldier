@@ -5,13 +5,18 @@ extends CharacterBody2D
 var max_speed = 400
 @export
 var hp : int = 3
+@export
+var max_ammo = 50
+@onready
+var ammo = max_ammo
 @onready
 var animations = $AnimatedSprite2D
 @onready
 var state_machine = $StateMachine
 @onready
 var raycast_shoot = $RayCast2D
-
+@onready
+var reload_timer = $ReloadTimer
 
 var orientation = 0
 
@@ -32,7 +37,7 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func _physics_process(delta: float) -> void:
 	debug.text = state_machine.current_state.get_name()
-	debug2.text = str(hp)
+	debug2.text = str(reload_timer.time_left)
 	state_machine.process_physics(delta)
 	velocity.y += gravity * delta
 	move_and_slide()
