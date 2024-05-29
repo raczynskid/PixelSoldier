@@ -4,7 +4,9 @@ extends CharacterBody2D
 @export
 var max_speed = 400
 @export
-var hp : int = 3
+var max_hp : int = 100
+@export
+var hp : int = max_hp
 @export
 var max_ammo = 50
 @onready

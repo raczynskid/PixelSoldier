@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://dqpqhuwb4vckm"]
+[gd_scene load_steps=5 format=3 uid="uid://dqpqhuwb4vckm"]
 
 [ext_resource type="Script" path="res://scripts/UI.gd" id="1_juvvd"]
 [ext_resource type="Texture2D" uid="uid://j20gdoloe4mo" path="res://assets/ammobar_background.png" id="1_tyj2h"]
 [ext_resource type="Texture2D" uid="uid://jhcpsg7m7yds" path="res://assets/ammobar_foreground.png" id="2_5h7ji"]
+[ext_resource type="Texture2D" uid="uid://bmg0xl818a4gg" path="res://assets/healthbar.png" id="3_ox6w8"]
 
 [node name="UI" type="Control"]
 layout_mode = 3
@@ -13,10 +14,19 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_juvvd")
 
-[node name="TextureProgressBar" type="TextureProgressBar" parent="."]
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
+
+[node name="HealthBar" type="TextureProgressBar" parent="HBoxContainer"]
+layout_mode = 2
+fill_mode = 3
+texture_under = ExtResource("1_tyj2h")
+texture_progress = ExtResource("3_ox6w8")
+
+[node name="AmmoBar" type="TextureProgressBar" parent="HBoxContainer"]
+layout_mode = 2
 fill_mode = 3
 texture_under = ExtResource("1_tyj2h")
 texture_progress = ExtResource("2_5h7ji")
