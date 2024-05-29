@@ -2,7 +2,7 @@ extends Node
 
 var parent
 @export
-var reload_timer = 1.0
+var reload_timer = 0.7
 
 func shoot(called_from_node : String):
 	if parent.ammo > 0:

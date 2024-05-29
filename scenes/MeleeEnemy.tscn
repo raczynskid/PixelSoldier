@@ -177,7 +177,7 @@ hp = 100
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_phs0b")
-animation = &"Die"
+animation = &"Attack"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(1, 6)
@@ -200,7 +200,7 @@ target_position = Vector2(4.29153e-06, 94)
 
 [node name="AttackRaycast" type="RayCast2D" parent="."]
 rotation = 1.5708
-target_position = Vector2(6.11959e-07, 14)
+target_position = Vector2(3.25799e-05, 9)
 
 [node name="GroundRaycast" type="RayCast2D" parent="."]
 position = Vector2(-3, 0)
@@ -242,10 +242,12 @@ chase_speed = 60
 animation_name = "Run"
 
 [node name="Debug" type="Label" parent="."]
+visible = false
 offset_right = 40.0
 offset_bottom = 23.0
 
 [node name="Debug2" type="Label" parent="."]
+visible = false
 offset_top = -15.0
 offset_right = 40.0
 offset_bottom = 8.0

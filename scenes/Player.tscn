@@ -167,7 +167,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_qw27c")
 }],
-"loop": true,
+"loop": false,
 "name": &"Die",
 "speed": 5.0
 }, {
@@ -273,7 +273,7 @@ max_speed = 300
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(1, 0)
 sprite_frames = SubResource("SpriteFrames_v08y1")
-animation = &"Idle"
+animation = &"Die"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_yaeis")

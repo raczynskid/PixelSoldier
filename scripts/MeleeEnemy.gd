@@ -5,6 +5,8 @@ extends CharacterBody2D
 var max_speed = 400
 @export
 var hp : int = 3
+@export
+var damage : int = 10
 @onready
 var animations = $AnimatedSprite2D
 @onready

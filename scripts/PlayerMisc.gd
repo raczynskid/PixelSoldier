@@ -10,3 +10,8 @@ func decelerate(_delta):
 
 func interact():
 	Signals.interact.emit()
+
+func die():
+	parent.is_dead = true
+	parent.animations.play("Die")
+	parent.velocity = Vector2.ZERO
